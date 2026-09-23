@@ -32,7 +32,7 @@ function favicon(options: ViewOptions): string {
 <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png?v=${version}">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png?v=${version}">
 <link rel="manifest" href="favicon/site.webmanifest?v=${version}">
-<link rel="mask-icon" href="favicon/safari-pinned-tab.svg?v=4" color="#ff5a00">
+<link rel="mask-icon" href="favicon/safari-pinned-tab.svg?v=4" color="#008bdb">
 <link rel="shortcut icon" href="favicon/favicon.ico?v=${version}">
 <meta name="apple-mobile-web-app-title" content="${title}">
 <meta name="application-name" content="${title}">

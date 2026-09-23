@@ -25,7 +25,7 @@ import { nestedDataset } from "./nested-dataset";
 export type ColorScale = scale.Linear<string, string>;
 
 const white = "#fff";
-const orange = "#ff5a00";
+const blue = "#008bdb";
 
 interface Scales {
   x: LinearScale;
@@ -60,7 +60,7 @@ export default function scales(dataset: Datum[], tileSize: number, series: Concr
   const colorMax = max(dataset, d => max(nestedDataset(d), select));
 
   const color = scaleLinear<string, string>({
-    range: [white, orange],
+    range: [white, blue],
     domain: [Math.min(colorMin, 0), colorMax]
   });
 

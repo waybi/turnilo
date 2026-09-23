@@ -48,7 +48,7 @@ describe("scales", () => {
     });
 
     it("should create color scale with correct range", () => {
-      expect(color.range()).to.deep.equal(["#fff", "#ff5a00"]);
+      expect(color.range()).to.deep.equal(["#fff", "#008bdb"]);
     });
   });
 
@@ -76,7 +76,7 @@ describe("scales", () => {
     });
 
     it("should create color scale with correct range", () => {
-      expect(color.range()).to.deep.equal(["#fff", "#ff5a00"]);
+      expect(color.range()).to.deep.equal(["#fff", "#008bdb"]);
     });
   });
 });

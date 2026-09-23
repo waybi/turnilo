@@ -5,3 +5,8 @@
 *.tgz
 config.yml
 config.yaml
+
+# dc: local data-center dataset (share via Feishu, not git)
+/dc/data/
+/dc/config.before-merge.yaml
+!/dc/config.yaml

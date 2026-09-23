@@ -1,0 +1,192 @@
+# Turnilo 配置：大兵一号店(113) / 大兵2号店(112) 数据分析
+# 数据由 dc/export.mjs 从 data-center MySQL 导出；启动：node bin/turnilo --config dc/config.yaml --port 9092
+
+customization:
+  title: 大兵店铺数据分析
+
+dataCubes:
+  # ============ 1. 广告分析（日报 + 搜索词 + 商品 三合一） ============
+  - name: ads
+    title: 广告分析
+    description: |
+      广告日报、广告搜索词、广告商品**合在一张表**里，按活动/店铺/状态一起拖拽。
+
+      **三组指标，各看各的层，不会重复计算：**
+      - 「日报 · 」开头：按天的活动数据，**看趋势用这组**（时间轴是真实日期）。
+      - 「搜索词 · 」开头：买家搜索词（含没点击的），只有两期报表 **06-18~07-18**、**08-23~09-23**，07-19~08-22 暂无。
+      - 「商品 · 」开头：每个商品最近 1 个月的汇总快照（08-24~09-24），只有同步那天一个时间点。
+
+      用法：拖「搜索词」维度时配「搜索词 · 」指标，拖「商品名称」时配「商品 · 」指标；「日报」没有搜索词和商品维度，这两个维度下日报指标会落到「空值」行。
+
+      ⚠️ 2号店 2026-07 花费翻倍系 CRM 误操作重复开广告，按异常月看待。活动状态是**当前状态**，不是当时的状态。
+    clusterName: native
+    source: data/ads_all.json
+    timeAttribute: time
+    defaultDuration: P1Y
+    defaultSortMeasure: d_spends
+    defaultSelectedMeasures: [d_spends, d_revenue, d_roas]
+    defaultPinnedDimensions: [store, campaignStatus, reportWindow]
+    introspection: no-autofill
+    maxSplits: 4
+    dimensions:
+      - { name: time, title: 日期, description: "日报=当天；搜索词=报表期开始日；商品=同步日", kind: time, formula: $time }
+      - { name: store, title: 店铺, formula: $store }
+      - { name: level, title: 数据层级, description: "daily=日报，query=搜索词，sku=商品", formula: $level }
+      - { name: reportWindow, title: 报表期, description: "日报=每日；搜索词/商品=该份报表覆盖的日期段", formula: $reportWindow }
+      - name: campaignGroup
+        title: 广告活动
+        dimensions:
+          - { name: campaignName, title: 广告活动, formula: $campaignName }
+          - { name: campaign, title: 广告活动编码, formula: $campaign }
+          - { name: campaignStatus, title: 活动状态, description: "live=在投，paused=暂停，archived=归档（当前状态）", formula: $campaignStatus }
+          - { name: campaignBudget, title: 活动日预算, kind: number, formula: $campaignBudget }
+          - { name: targeting, title: 投放方式, description: "keyword=关键词投放，category=类目投放", formula: $targeting }
+          - { name: adgroup, title: 广告组编码, formula: $adgroup }
+      - name: queryGroup
+        title: 搜索词
+        dimensions:
+          - { name: query, title: 搜索词, formula: $query }
+          - { name: queryCn, title: 搜索词中文, formula: $queryCn }
+          - { name: pushedNegative, title: 是否已否定, formula: $pushedNegative }
+          - { name: hasClick, title: 有无点击, formula: $hasClick }
+          - { name: bid, title: 出价, kind: number, formula: $bid }
+      - name: skuGroup
+        title: 商品
+        dimensions:
+          - { name: skuName, title: 商品名称, formula: $skuName }
+          - { name: sku, title: SKU, formula: $sku }
+      - { name: hasOrder, title: 有无订单, description: "搜索词/商品层适用", formula: $hasOrder }
+    measures:
+      - name: g_d
+        title: 日报
+        measures:
+          - { name: d_spends, title: "日报 · 花费(SAR)", formula: "$main.filter($level == 'daily').sum($spends)", format: "0,0.00" }
+          - { name: d_revenue, title: "日报 · 广告销售额(SAR)", formula: "$main.filter($level == 'daily').sum($revenue)", format: "0,0.00" }
+          - { name: d_orders, title: "日报 · 订单", formula: "$main.filter($level == 'daily').sum($orders)", format: "0,0" }
+          - { name: d_clicks, title: "日报 · 点击", formula: "$main.filter($level == 'daily').sum($clicks)", format: "0,0" }
+          - { name: d_views, title: "日报 · 曝光", formula: "$main.filter($level == 'daily').sum($views)", format: "0,0" }
+          - { name: d_atc, title: "日报 · 加购", formula: "$main.filter($level == 'daily').sum($atc)", format: "0,0" }
+          - { name: d_roas, title: "日报 · ROAS", formula: "$main.filter($level == 'daily').sum($revenue) / $main.filter($level == 'daily').sum($spends)", format: "0,0.00" }
+          - { name: d_cpc, title: "日报 · CPC 单次点击价", formula: "$main.filter($level == 'daily').sum($spends) / $main.filter($level == 'daily').sum($clicks)", format: "0,0.00" }
+          - { name: d_ctr, title: "日报 · CTR 点击率", formula: "$main.filter($level == 'daily').sum($clicks) / $main.filter($level == 'daily').sum($views)", format: "0.00%" }
+          - { name: d_cvr, title: "日报 · CVR 转化率", formula: "$main.filter($level == 'daily').sum($orders) / $main.filter($level == 'daily').sum($clicks)", format: "0.00%" }
+      - name: g_q
+        title: 搜索词
+        measures:
+          - { name: q_spends, title: "搜索词 · 花费(SAR)", formula: "$main.filter($level == 'query').sum($spends)", format: "0,0.00" }
+          - { name: q_revenue, title: "搜索词 · 广告销售额(SAR)", formula: "$main.filter($level == 'query').sum($revenue)", format: "0,0.00" }
+          - { name: q_orders, title: "搜索词 · 订单", formula: "$main.filter($level == 'query').sum($orders)", format: "0,0" }
+          - { name: q_clicks, title: "搜索词 · 点击", formula: "$main.filter($level == 'query').sum($clicks)", format: "0,0" }
+          - { name: q_views, title: "搜索词 · 曝光", formula: "$main.filter($level == 'query').sum($views)", format: "0,0" }
+          - { name: q_atc, title: "搜索词 · 加购", formula: "$main.filter($level == 'query').sum($atc)", format: "0,0" }
+          - { name: q_roas, title: "搜索词 · ROAS", formula: "$main.filter($level == 'query').sum($revenue) / $main.filter($level == 'query').sum($spends)", format: "0,0.00" }
+          - { name: q_cpc, title: "搜索词 · CPC 单次点击价", formula: "$main.filter($level == 'query').sum($spends) / $main.filter($level == 'query').sum($clicks)", format: "0,0.00" }
+          - { name: q_ctr, title: "搜索词 · CTR 点击率", formula: "$main.filter($level == 'query').sum($clicks) / $main.filter($level == 'query').sum($views)", format: "0.00%" }
+          - { name: q_cvr, title: "搜索词 · CVR 转化率", formula: "$main.filter($level == 'query').sum($orders) / $main.filter($level == 'query').sum($clicks)", format: "0.00%" }
+          - { name: q_uniq, title: "搜索词 · 不同搜索词数", formula: "$main.filter($level == 'query').countDistinct($query)", format: "0,0" }
+      - name: g_s
+        title: 商品
+        measures:
+          - { name: s_spends, title: "商品 · 花费(SAR)", formula: "$main.filter($level == 'sku').sum($spends)", format: "0,0.00" }
+          - { name: s_revenue, title: "商品 · 广告销售额(SAR)", formula: "$main.filter($level == 'sku').sum($revenue)", format: "0,0.00" }
+          - { name: s_orders, title: "商品 · 订单", formula: "$main.filter($level == 'sku').sum($orders)", format: "0,0" }
+          - { name: s_clicks, title: "商品 · 点击", formula: "$main.filter($level == 'sku').sum($clicks)", format: "0,0" }
+          - { name: s_views, title: "商品 · 曝光", formula: "$main.filter($level == 'sku').sum($views)", format: "0,0" }
+          - { name: s_atc, title: "商品 · 加购", formula: "$main.filter($level == 'sku').sum($atc)", format: "0,0" }
+          - { name: s_roas, title: "商品 · ROAS", formula: "$main.filter($level == 'sku').sum($revenue) / $main.filter($level == 'sku').sum($spends)", format: "0,0.00" }
+          - { name: s_cpc, title: "商品 · CPC 单次点击价", formula: "$main.filter($level == 'sku').sum($spends) / $main.filter($level == 'sku').sum($clicks)", format: "0,0.00" }
+          - { name: s_ctr, title: "商品 · CTR 点击率", formula: "$main.filter($level == 'sku').sum($clicks) / $main.filter($level == 'sku').sum($views)", format: "0.00%" }
+          - { name: s_cvr, title: "商品 · CVR 转化率", formula: "$main.filter($level == 'sku').sum($orders) / $main.filter($level == 'sku').sum($clicks)", format: "0.00%" }
+          - { name: s_uniq, title: "商品 · 商品数", formula: "$main.filter($level == 'sku').countDistinct($sku)", format: "0,0" }
+
+  # ============ 3. 订单 ============
+  - name: orders
+    title: 订单
+    description: |
+      两家店的全部订单（orders 表）。退货率口径：CIR ÷ (Delivered + CIR)。
+    clusterName: native
+    source: data/orders.json
+    timeAttribute: time
+    defaultDuration: P3M
+    defaultSortMeasure: count
+    defaultSelectedMeasures: [count, sales]
+    defaultPinnedDimensions: [store, status]
+    introspection: no-autofill
+    dimensions:
+      - { name: time, title: 下单时间, kind: time, formula: $time }
+      - { name: store, title: 店铺, formula: $store }
+      - { name: status, title: 订单状态, formula: $status }
+      - { name: sku, title: SKU, formula: $sku }
+      - { name: psku, title: 我方SKU(psku), formula: $psku }
+      - { name: fulfillment, title: 发货方式, formula: $fulfillment }
+      - { name: orderNr, title: 订单号, formula: $orderNr }
+    measures:
+      - { name: count, title: 订单数, formula: $main.count(), format: "0,0" }
+      - { name: sales, title: 销售额(SAR), formula: $main.sum($price), format: "0,0.00" }
+      - { name: avgPrice, title: 客单价(SAR), formula: $main.average($price), format: "0,0.00" }
+      - { name: fees, title: 平台费用(SAR), formula: $main.sum($fees), format: "0,0.00" }
+      - name: returnRate
+        title: 退货率
+        description: CIR ÷ (Delivered + CIR)
+        formula: "$main.filter($status == 'CIR').count() / $main.filter($status == 'CIR' or $status == 'Delivered').count()"
+        format: "0.00%"
+
+  # ============ 4. 到账明细 ============
+  - name: transactions
+    title: 到账明细
+    description: 每笔订单 Noon 结算的净到账与各项扣费（order_transactions 表）。
+    clusterName: native
+    source: data/transactions.json
+    timeAttribute: time
+    defaultDuration: P3M
+    defaultSortMeasure: netProceeds
+    defaultSelectedMeasures: [netProceeds, totalFees]
+    defaultPinnedDimensions: [store, type]
+    introspection: no-autofill
+    dimensions:
+      - { name: time, title: 结算日期, kind: time, formula: $time }
+      - { name: store, title: 店铺, formula: $store }
+      - { name: type, title: 交易类型, formula: $type }
+      - { name: orderNr, title: 订单号, formula: $orderNr }
+    measures:
+      - { name: netProceeds, title: 净到账(SAR), formula: $main.sum($netProceeds), format: "0,0.00" }
+      - { name: subtotal, title: 小计(SAR), formula: $main.sum($subtotal), format: "0,0.00" }
+      - { name: totalFees, title: 总扣费(SAR), formula: $main.sum($totalFees), format: "0,0.00" }
+      - { name: referralFee, title: 佣金(SAR), formula: $main.sum($referralFee), format: "0,0.00" }
+      - { name: fbnFee, title: FBN出库费(SAR), formula: $main.sum($fbnFee), format: "0,0.00" }
+      - { name: otherFees, title: 其他费用(SAR), formula: $main.sum($otherFees), format: "0,0.00" }
+      - { name: count, title: 笔数, formula: $main.count(), format: "0,0" }
+
+  # ============ 5. 商品每日快照 ============
+  - name: catalog
+    title: 商品每日快照
+    description: |
+      每个商品每天的价格、销量、库存、是否拿到购物车（2026-06-28 起）。
+
+      注意：库存、价格是「当天状态」，跨多天加总没有意义，请按天拆分或看平均值。
+    clusterName: native
+    source: data/catalog.json
+    timeAttribute: time
+    defaultDuration: P1M
+    defaultSortMeasure: unitsSold
+    defaultSelectedMeasures: [unitsSold, gmv]
+    defaultPinnedDimensions: [store, buybox]
+    introspection: no-autofill
+    dimensions:
+      - { name: time, title: 快照日期, kind: time, formula: $time }
+      - { name: store, title: 店铺, formula: $store }
+      - { name: title, title: 商品标题, formula: $title }
+      - { name: sku, title: SKU, formula: $sku }
+      - { name: psku, title: 我方SKU(psku), formula: $psku }
+      - { name: family, title: 品类, formula: $family }
+      - { name: brand, title: 品牌, formula: $brand }
+      - { name: liveStatus, title: 上架状态, formula: $liveStatus }
+      - { name: buybox, title: 购物车, formula: $buybox }
+    measures:
+      - { name: unitsSold, title: 销量, formula: $main.sum($unitsSold), format: "0,0" }
+      - { name: gmv, title: GMV(SAR), formula: $main.sum($gmv), format: "0,0.00" }
+      - { name: gvs, title: 访客(GVS), formula: $main.sum($gvs), format: "0,0" }
+      - { name: avgPrice, title: 平均价格(SAR), formula: $main.average($price), format: "0,0.00" }
+      - { name: avgFbnStock, title: 平均FBN库存, formula: $main.average($fbnStock), format: "0,0.0" }
+      - { name: avgFbpStock, title: 平均FBP库存, formula: $main.average($fbpStock), format: "0,0.0" }
+      - { name: skuCount, title: 商品数, formula: $main.countDistinct($sku), format: "0,0" }
