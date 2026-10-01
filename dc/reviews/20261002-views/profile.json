@@ -1,0 +1,4374 @@
+{
+  "reviewedAt": "2026-10-01T16:55:39.846Z",
+  "run": "20261001T125009789Z",
+  "exportStarted": "2026-10-01T12:50:09.793Z",
+  "exportCompleted": "2026-10-01T12:51:20.554Z",
+  "views": [
+    {
+      "name": "ads",
+      "title": "广告分析",
+      "measures": [
+        {
+          "name": "g_d",
+          "title": "日报",
+          "measures": [
+            {
+              "name": "d_spends",
+              "title": "日报 · 花费(SAR)",
+              "formula": "$main.filter($level == 'daily').sum($spends)",
+              "format": "0,0.00"
+            },
+            {
+              "name": "d_revenue",
+              "title": "日报 · 广告销售额(SAR)",
+              "formula": "$main.filter($level == 'daily').sum($revenue)",
+              "format": "0,0.00"
+            },
+            {
+              "name": "d_orders",
+              "title": "日报 · 订单",
+              "formula": "$main.filter($level == 'daily').sum($orders)",
+              "format": "0,0"
+            },
+            {
+              "name": "d_clicks",
+              "title": "日报 · 点击",
+              "formula": "$main.filter($level == 'daily').sum($clicks)",
+              "format": "0,0"
+            },
+            {
+              "name": "d_views",
+              "title": "日报 · 曝光",
+              "formula": "$main.filter($level == 'daily').sum($views)",
+              "format": "0,0"
+            },
+            {
+              "name": "d_atc",
+              "title": "日报 · 加购",
+              "formula": "$main.filter($level == 'daily').sum($atc)",
+              "format": "0,0"
+            },
+            {
+              "name": "d_roas",
+              "title": "日报 · ROAS",
+              "formula": "$main.filter($level == 'daily').sum($revenue) / $main.filter($level == 'daily').sum($spends)",
+              "format": "0,0.00"
+            },
+            {
+              "name": "d_cpc",
+              "title": "日报 · CPC 单次点击价",
+              "formula": "$main.filter($level == 'daily').sum($spends) / $main.filter($level == 'daily').sum($clicks)",
+              "format": "0,0.00"
+            },
+            {
+              "name": "d_ctr",
+              "title": "日报 · CTR 点击率",
+              "formula": "$main.filter($level == 'daily').sum($clicks) / $main.filter($level == 'daily').sum($views)",
+              "format": "0.00%"
+            },
+            {
+              "name": "d_cvr",
+              "title": "日报 · CVR 转化率",
+              "formula": "$main.filter($level == 'daily').sum($orders) / $main.filter($level == 'daily').sum($clicks)",
+              "format": "0.00%"
+            }
+          ]
+        },
+        {
+          "name": "g_q",
+          "title": "搜索词",
+          "measures": [
+            {
+              "name": "q_spends",
+              "title": "搜索词 · 花费(SAR)",
+              "formula": "$main.filter($level == 'query').sum($spends)",
+              "format": "0,0.00"
+            },
+            {
+              "name": "q_revenue",
+              "title": "搜索词 · 广告销售额(SAR)",
+              "formula": "$main.filter($level == 'query').sum($revenue)",
+              "format": "0,0.00"
+            },
+            {
+              "name": "q_orders",
+              "title": "搜索词 · 订单",
+              "formula": "$main.filter($level == 'query').sum($orders)",
+              "format": "0,0"
+            },
+            {
+              "name": "q_clicks",
+              "title": "搜索词 · 点击",
+              "formula": "$main.filter($level == 'query').sum($clicks)",
+              "format": "0,0"
+            },
+            {
+              "name": "q_views",
+              "title": "搜索词 · 曝光",
+              "formula": "$main.filter($level == 'query').sum($views)",
+              "format": "0,0"
+            },
+            {
+              "name": "q_atc",
+              "title": "搜索词 · 加购",
+              "formula": "$main.filter($level == 'query').sum($atc)",
+              "format": "0,0"
+            },
+            {
+              "name": "q_roas",
+              "title": "搜索词 · ROAS",
+              "formula": "$main.filter($level == 'query').sum($revenue) / $main.filter($level == 'query').sum($spends)",
+              "format": "0,0.00"
+            },
+            {
+              "name": "q_cpc",
+              "title": "搜索词 · CPC 单次点击价",
+              "formula": "$main.filter($level == 'query').sum($spends) / $main.filter($level == 'query').sum($clicks)",
+              "format": "0,0.00"
+            },
+            {
+              "name": "q_ctr",
+              "title": "搜索词 · CTR 点击率",
+              "formula": "$main.filter($level == 'query').sum($clicks) / $main.filter($level == 'query').sum($views)",
+              "format": "0.00%"
+            },
+            {
+              "name": "q_cvr",
+              "title": "搜索词 · CVR 转化率",
+              "formula": "$main.filter($level == 'query').sum($orders) / $main.filter($level == 'query').sum($clicks)",
+              "format": "0.00%"
+            },
+            {
+              "name": "q_uniq",
+              "title": "搜索词 · 不同搜索词数",
+              "formula": "$main.filter($level == 'query').countDistinct($query)",
+              "format": "0,0"
+            }
+          ]
+        },
+        {
+          "name": "g_s",
+          "title": "商品",
+          "measures": [
+            {
+              "name": "s_spends",
+              "title": "商品 · 花费(SAR)",
+              "formula": "$main.filter($level == 'sku').sum($spends)",
+              "format": "0,0.00"
+            },
+            {
+              "name": "s_revenue",
+              "title": "商品 · 广告销售额(SAR)",
+              "formula": "$main.filter($level == 'sku').sum($revenue)",
+              "format": "0,0.00"
+            },
+            {
+              "name": "s_orders",
+              "title": "商品 · 订单",
+              "formula": "$main.filter($level == 'sku').sum($orders)",
+              "format": "0,0"
+            },
+            {
+              "name": "s_clicks",
+              "title": "商品 · 点击",
+              "formula": "$main.filter($level == 'sku').sum($clicks)",
+              "format": "0,0"
+            },
+            {
+              "name": "s_views",
+              "title": "商品 · 曝光",
+              "formula": "$main.filter($level == 'sku').sum($views)",
+              "format": "0,0"
+            },
+            {
+              "name": "s_atc",
+              "title": "商品 · 加购",
+              "formula": "$main.filter($level == 'sku').sum($atc)",
+              "format": "0,0"
+            },
+            {
+              "name": "s_roas",
+              "title": "商品 · ROAS",
+              "formula": "$main.filter($level == 'sku').sum($revenue) / $main.filter($level == 'sku').sum($spends)",
+              "format": "0,0.00"
+            },
+            {
+              "name": "s_cpc",
+              "title": "商品 · CPC 单次点击价",
+              "formula": "$main.filter($level == 'sku').sum($spends) / $main.filter($level == 'sku').sum($clicks)",
+              "format": "0,0.00"
+            },
+            {
+              "name": "s_ctr",
+              "title": "商品 · CTR 点击率",
+              "formula": "$main.filter($level == 'sku').sum($clicks) / $main.filter($level == 'sku').sum($views)",
+              "format": "0.00%"
+            },
+            {
+              "name": "s_cvr",
+              "title": "商品 · CVR 转化率",
+              "formula": "$main.filter($level == 'sku').sum($orders) / $main.filter($level == 'sku').sum($clicks)",
+              "format": "0.00%"
+            },
+            {
+              "name": "s_uniq",
+              "title": "商品 · 商品数",
+              "formula": "$main.filter($level == 'sku').countDistinct($sku)",
+              "format": "0,0"
+            }
+          ]
+        }
+      ],
+      "description": "广告日报、搜索词、商品三层视图；每组指标只计算本层。搜索词按店铺选择不重叠的完整报表期（不拆分、不按月摊分）。本次窗口：2号店 2026-09-01～2026-10-01；2号店 2026-06-18～2026-07-18；1号店 2026-09-01～2026-10-01；1号店 2026-06-18～2026-07-18。日报是每日事实，商品是最近一月的当前快照。活动状态为当前值。全部重叠历史另见“搜索词全部窗口”，不可跨窗口累计。2号店2026-07为重复开广告异常月。"
+    },
+    {
+      "name": "orders",
+      "title": "订单",
+      "measures": [
+        {
+          "name": "count",
+          "title": "订单商品条目",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "sales",
+          "title": "销售额(SAR)",
+          "formula": "$main.sum($price)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "avgPrice",
+          "title": "客单价(SAR)",
+          "formula": "$main.average($price)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "fees",
+          "title": "平台费用(SAR)",
+          "formula": "$main.sum($fees)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "returnRate",
+          "title": "退货率",
+          "description": "CIR ÷ (Delivered + CIR)",
+          "formula": "$main.filter($status == 'CIR').count() / $main.filter($status == 'CIR' or $status == 'Delivered').count()",
+          "format": "0.00%"
+        }
+      ],
+      "description": "两家店的全部订单（orders 表）。退货率口径：CIR ÷ (Delivered + CIR)。\n 计数为item_nr商品条目，不是结账主订单数。"
+    },
+    {
+      "name": "transactions",
+      "title": "到账明细",
+      "measures": [
+        {
+          "name": "netProceeds",
+          "title": "净到账(SAR)",
+          "formula": "$main.sum($netProceeds)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "subtotal",
+          "title": "小计(SAR)",
+          "formula": "$main.sum($subtotal)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "totalFees",
+          "title": "总扣费(SAR)",
+          "formula": "$main.sum($totalFees)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "referralFee",
+          "title": "佣金(SAR)",
+          "formula": "$main.sum($referralFee)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "fbnFee",
+          "title": "FBN出库费(SAR)",
+          "formula": "$main.sum($fbnFee)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "otherFees",
+          "title": "其他费用(SAR)",
+          "formula": "$main.sum($otherFees)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "count",
+          "title": "笔数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        }
+      ],
+      "description": "每笔订单 Noon 结算的净到账与各项扣费（order_transactions 表）。"
+    },
+    {
+      "name": "catalog",
+      "title": "商品每日快照",
+      "measures": [
+        {
+          "name": "unitsSold",
+          "title": "销量",
+          "formula": "$main.sum($unitsSold)",
+          "format": "0,0"
+        },
+        {
+          "name": "gmv",
+          "title": "GMV(SAR)",
+          "formula": "$main.sum($gmv)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "gvs",
+          "title": "访客(GVS)",
+          "formula": "$main.sum($gvs)",
+          "format": "0,0"
+        },
+        {
+          "name": "avgPrice",
+          "title": "平均价格(SAR)",
+          "formula": "$main.average($price)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "avgFbnStock",
+          "title": "平均FBN库存",
+          "formula": "$main.average($fbnStock)",
+          "format": "0,0.0"
+        },
+        {
+          "name": "avgFbpStock",
+          "title": "平均FBP库存",
+          "formula": "$main.average($fbpStock)",
+          "format": "0,0.0"
+        },
+        {
+          "name": "skuCount",
+          "title": "商品数",
+          "formula": "$main.countDistinct($sku)",
+          "format": "0,0"
+        }
+      ],
+      "description": "每个商品每天的价格、销量、库存、是否拿到购物车（2026-06-28 起）。\n\n注意：库存、价格是「当天状态」，跨多天加总没有意义，请按天拆分或看平均值。\n"
+    },
+    {
+      "name": "statements",
+      "title": "结算账单",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "netProceeds",
+          "title": "净收入",
+          "formula": "$main.sum($netProceeds)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "fees",
+          "title": "费用",
+          "formula": "$main.sum($fees)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "others",
+          "title": "其他",
+          "formula": "$main.sum($others)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "totalDue",
+          "title": "应付合计",
+          "formula": "$main.sum($totalDue)",
+          "format": "0,0.00"
+        }
+      ],
+      "description": "每行一份结算账单/合同业务键；交易与账单属于不同粒度，不能相加。货币按currency区分。"
+    },
+    {
+      "name": "inventory",
+      "title": "商品与当前库存",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "price",
+          "title": "平均售价",
+          "formula": "$main.average($price)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "purchasePrice",
+          "title": "平均采购价",
+          "formula": "$main.average($purchasePrice)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "fbnStock",
+          "title": "FBN库存",
+          "formula": "$main.sum($fbnStock)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "fbpStock",
+          "title": "FBP库存",
+          "formula": "$main.sum($fbpStock)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "weight",
+          "title": "平均重量",
+          "formula": "$main.average($weight)",
+          "format": "0,0.00"
+        }
+      ],
+      "description": "每行一个当前商品，日期是源表更新时间，不是历史库存；采购价/销售价请看平均值。"
+    },
+    {
+      "name": "campaigns",
+      "title": "广告活动当前状态",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "budget",
+          "title": "日预算",
+          "formula": "$main.sum($budget)",
+          "format": "0,0.00"
+        }
+      ],
+      "description": "当前广告活动/广告组清单；日预算是当前配置，不是实际花费。"
+    },
+    {
+      "name": "procurement",
+      "title": "补货计划",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "fbnStock",
+          "title": "平均参考库存",
+          "formula": "$main.average($fbnStock)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "dailySales",
+          "title": "平均日销量",
+          "formula": "$main.average($dailySales)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "airQty",
+          "title": "计划空运数",
+          "formula": "$main.sum($airQty)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "seaQty",
+          "title": "计划海运数",
+          "formula": "$main.sum($seaQty)",
+          "format": "0,0.00"
+        }
+      ],
+      "description": "每行一个计划日期×商品；跨计划日期是不同版本，库存与建议补货量不能当真实采购量累加。"
+    },
+    {
+      "name": "purchases",
+      "title": "采购批次",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "units",
+          "title": "采购数",
+          "formula": "$main.sum($units)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "freight",
+          "title": "运费",
+          "formula": "$main.sum($freight)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "weight",
+          "title": "重量",
+          "formula": "$main.sum($weight)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "volume",
+          "title": "体积",
+          "formula": "$main.sum($volume)",
+          "format": "0,0.00"
+        }
+      ],
+      "description": "每行一批采购；日期缺失时使用创建日。与采购商品明细是父子两层，数量不可相加。"
+    },
+    {
+      "name": "purchase_items",
+      "title": "采购商品明细",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "units",
+          "title": "采购商品数",
+          "formula": "$main.sum($units)",
+          "format": "0,0.00"
+        }
+      ],
+      "description": "每行一批次内一个商品；仅采购商品数量，不重复分摊整批运费。"
+    },
+    {
+      "name": "promotions",
+      "title": "促销活动",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "discountPct",
+          "title": "平均折扣比例",
+          "formula": "$main.average($discountPct)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "itemsSold",
+          "title": "活动销量",
+          "formula": "$main.sum($itemsSold)",
+          "format": "0,0.00"
+        }
+      ],
+      "description": "当前促销活动快照；时间为更新日，活动起止日期独立显示。GMV原文未确认币种不自动加总。"
+    },
+    {
+      "name": "coupons",
+      "title": "优惠券",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "budget",
+          "title": "预算",
+          "formula": "$main.sum($budget)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "burnt",
+          "title": "已使用预算",
+          "formula": "$main.sum($burnt)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "products",
+          "title": "适用商品数",
+          "formula": "$main.sum($products)",
+          "format": "0,0.00"
+        }
+      ],
+      "description": "优惠券当前快照；折扣额度/比例需按折扣类型阅读。"
+    },
+    {
+      "name": "deal_items",
+      "title": "促销商品",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        }
+      ],
+      "description": "每行活动×商家SKU当前参与状态；价格保留源文本，不把异常文本转为零。"
+    },
+    {
+      "name": "competitors",
+      "title": "已绑定竞品",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "price",
+          "title": "平均竞品价",
+          "formula": "$main.average($price)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "sold",
+          "title": "平均销量快照",
+          "formula": "$main.average($sold)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "ratingCount",
+          "title": "平均评价数",
+          "formula": "$main.average($ratingCount)",
+          "format": "0,0.00"
+        }
+      ],
+      "description": "两店绑定的竞品当前快照；销量为源端快照，不能按抓取次数累计。"
+    },
+    {
+      "name": "competitor_history",
+      "title": "竞品历史快照",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "price",
+          "title": "平均竞品价",
+          "formula": "$main.average($price)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "sold",
+          "title": "平均销量快照",
+          "formula": "$main.average($sold)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "ratingCount",
+          "title": "平均评价数",
+          "formula": "$main.average($ratingCount)",
+          "format": "0,0.00"
+        }
+      ],
+      "description": "每次抓取的竞品快照，库存/累计销量不跨时点求和。"
+    },
+    {
+      "name": "freight_settings",
+      "title": "运输成本参数",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "airFee",
+          "title": "空运费率",
+          "formula": "$main.average($airFee)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "shippingFee",
+          "title": "海运费率",
+          "formula": "$main.average($shippingFee)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "exchangeRate",
+          "title": "汇率",
+          "formula": "$main.average($exchangeRate)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "airDays",
+          "title": "空运天数",
+          "formula": "$main.average($airDays)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "shippingDays",
+          "title": "海运天数",
+          "formula": "$main.average($shippingDays)",
+          "format": "0,0.00"
+        }
+      ],
+      "description": "当前成本参数，不能跨店相加；均以平均值展示。"
+    },
+    {
+      "name": "sync_runs",
+      "title": "数据同步运行记录",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "sourceRows",
+          "title": "来源处理行数",
+          "formula": "$main.sum($sourceRows)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "storedRows",
+          "title": "本地处理行数",
+          "formula": "$main.sum($storedRows)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "pendingRows",
+          "title": "待处理行数",
+          "formula": "$main.sum($pendingRows)",
+          "format": "0,0.00"
+        }
+      ],
+      "description": "每行一个任务步骤；来源行数/存储行数是每次执行处理量，不能跨运行当作独立订单数。错误原文可能带敏感信息，未导出。"
+    },
+    {
+      "name": "search_windows_113",
+      "title": "1号店搜索词全部窗口",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "views",
+          "title": "曝光（限定单报表期）",
+          "formula": "$main.sum($views)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "clicks",
+          "title": "点击（限定单报表期）",
+          "formula": "$main.sum($clicks)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "orders",
+          "title": "订单（限定单报表期）",
+          "formula": "$main.sum($orders)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "atc",
+          "title": "加购（限定单报表期）",
+          "formula": "$main.sum($atc)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "spends",
+          "title": "花费（限定单报表期）",
+          "formula": "$main.sum($spends)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "revenue",
+          "title": "收入（限定单报表期）",
+          "formula": "$main.sum($revenue)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "bid",
+          "title": "平均出价",
+          "formula": "$main.average($bid)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "effectiveBid",
+          "title": "平均有效出价",
+          "formula": "$main.average($effectiveBid)",
+          "format": "0,0.00"
+        }
+      ],
+      "description": "保留全部原始报表区间（包括重叠）。先选一个完整报表期再看花费/订单；默认只显示记录数。日趋势请使用广告分析的日报指标，去重累计用广告分析的搜索词指标。"
+    },
+    {
+      "name": "search_windows_112",
+      "title": "2号店搜索词全部窗口",
+      "measures": [
+        {
+          "name": "count",
+          "title": "记录数",
+          "formula": "$main.count()",
+          "format": "0,0"
+        },
+        {
+          "name": "views",
+          "title": "曝光（限定单报表期）",
+          "formula": "$main.sum($views)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "clicks",
+          "title": "点击（限定单报表期）",
+          "formula": "$main.sum($clicks)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "orders",
+          "title": "订单（限定单报表期）",
+          "formula": "$main.sum($orders)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "atc",
+          "title": "加购（限定单报表期）",
+          "formula": "$main.sum($atc)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "spends",
+          "title": "花费（限定单报表期）",
+          "formula": "$main.sum($spends)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "revenue",
+          "title": "收入（限定单报表期）",
+          "formula": "$main.sum($revenue)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "bid",
+          "title": "平均出价",
+          "formula": "$main.average($bid)",
+          "format": "0,0.00"
+        },
+        {
+          "name": "effectiveBid",
+          "title": "平均有效出价",
+          "formula": "$main.average($effectiveBid)",
+          "format": "0,0.00"
+        }
+      ],
+      "description": "保留全部原始报表区间（包括重叠）。先选一个完整报表期再看花费/订单；默认只显示记录数。日趋势请使用广告分析的日报指标，去重累计用广告分析的搜索词指标。"
+    }
+  ],
+  "datasets": {
+    "ad_daily": {
+      "rows": 17659,
+      "byStore": {
+        "1号店": {
+          "rows": 10046,
+          "min": "2025-12-10T00:00:00Z",
+          "max": "2026-10-01T00:00:00Z",
+          "days": [
+            "2025-12-10",
+            "2025-12-11",
+            "2025-12-12",
+            "2025-12-13",
+            "2025-12-14",
+            "2025-12-15",
+            "2025-12-16",
+            "2025-12-17",
+            "2025-12-18",
+            "2025-12-19",
+            "2025-12-20",
+            "2025-12-21",
+            "2025-12-22",
+            "2025-12-23",
+            "2025-12-24",
+            "2025-12-25",
+            "2025-12-26",
+            "2025-12-27",
+            "2025-12-28",
+            "2025-12-29",
+            "2025-12-30",
+            "2025-12-31",
+            "2026-01-01",
+            "2026-01-02",
+            "2026-01-03",
+            "2026-01-04",
+            "2026-01-05",
+            "2026-01-06",
+            "2026-01-07",
+            "2026-01-08",
+            "2026-01-09",
+            "2026-01-10",
+            "2026-01-11",
+            "2026-01-12",
+            "2026-01-13",
+            "2026-01-14",
+            "2026-01-15",
+            "2026-01-16",
+            "2026-01-17",
+            "2026-01-18",
+            "2026-01-19",
+            "2026-01-20",
+            "2026-01-21",
+            "2026-01-22",
+            "2026-01-23",
+            "2026-01-24",
+            "2026-01-25",
+            "2026-01-26",
+            "2026-01-27",
+            "2026-01-28",
+            "2026-01-29",
+            "2026-01-30",
+            "2026-01-31",
+            "2026-02-01",
+            "2026-02-02",
+            "2026-02-03",
+            "2026-02-04",
+            "2026-02-05",
+            "2026-02-06",
+            "2026-02-07",
+            "2026-02-08",
+            "2026-02-09",
+            "2026-02-10",
+            "2026-02-11",
+            "2026-02-12",
+            "2026-02-13",
+            "2026-02-14",
+            "2026-02-15",
+            "2026-02-16",
+            "2026-02-17",
+            "2026-02-18",
+            "2026-02-19",
+            "2026-02-20",
+            "2026-02-21",
+            "2026-02-22",
+            "2026-02-23",
+            "2026-02-24",
+            "2026-02-25",
+            "2026-02-26",
+            "2026-02-27",
+            "2026-02-28",
+            "2026-03-01",
+            "2026-03-02",
+            "2026-03-03",
+            "2026-03-04",
+            "2026-03-05",
+            "2026-03-06",
+            "2026-03-07",
+            "2026-03-08",
+            "2026-03-09",
+            "2026-03-10",
+            "2026-03-11",
+            "2026-03-12",
+            "2026-03-13",
+            "2026-03-14",
+            "2026-03-15",
+            "2026-03-16",
+            "2026-03-17",
+            "2026-03-18",
+            "2026-03-19",
+            "2026-03-20",
+            "2026-03-21",
+            "2026-03-22",
+            "2026-03-23",
+            "2026-03-24",
+            "2026-03-25",
+            "2026-03-26",
+            "2026-03-27",
+            "2026-03-28",
+            "2026-03-29",
+            "2026-03-30",
+            "2026-03-31",
+            "2026-04-01",
+            "2026-04-02",
+            "2026-04-03",
+            "2026-04-04",
+            "2026-04-05",
+            "2026-04-06",
+            "2026-04-07",
+            "2026-04-08",
+            "2026-04-09",
+            "2026-04-10",
+            "2026-04-11",
+            "2026-04-12",
+            "2026-04-13",
+            "2026-04-14",
+            "2026-04-15",
+            "2026-04-16",
+            "2026-04-17",
+            "2026-04-18",
+            "2026-04-19",
+            "2026-04-20",
+            "2026-04-21",
+            "2026-04-22",
+            "2026-04-23",
+            "2026-04-24",
+            "2026-04-25",
+            "2026-04-26",
+            "2026-04-27",
+            "2026-04-28",
+            "2026-04-29",
+            "2026-04-30",
+            "2026-05-01",
+            "2026-05-02",
+            "2026-05-03",
+            "2026-05-04",
+            "2026-05-05",
+            "2026-05-06",
+            "2026-05-07",
+            "2026-05-08",
+            "2026-05-09",
+            "2026-05-10",
+            "2026-05-11",
+            "2026-05-12",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-16",
+            "2026-05-17",
+            "2026-05-18",
+            "2026-05-19",
+            "2026-05-20",
+            "2026-05-21",
+            "2026-05-22",
+            "2026-05-23",
+            "2026-05-24",
+            "2026-05-25",
+            "2026-05-26",
+            "2026-05-27",
+            "2026-05-28",
+            "2026-05-29",
+            "2026-05-30",
+            "2026-05-31",
+            "2026-06-01",
+            "2026-06-02",
+            "2026-06-03",
+            "2026-06-04",
+            "2026-06-05",
+            "2026-06-06",
+            "2026-06-07",
+            "2026-06-08",
+            "2026-06-09",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-12",
+            "2026-06-13",
+            "2026-06-14",
+            "2026-06-15",
+            "2026-06-16",
+            "2026-06-17",
+            "2026-06-18",
+            "2026-06-19",
+            "2026-06-20",
+            "2026-06-21",
+            "2026-06-22",
+            "2026-06-23",
+            "2026-06-24",
+            "2026-06-25",
+            "2026-06-26",
+            "2026-06-27",
+            "2026-06-28",
+            "2026-06-29",
+            "2026-06-30",
+            "2026-07-01",
+            "2026-07-02",
+            "2026-07-03",
+            "2026-07-04",
+            "2026-07-05",
+            "2026-07-06",
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-10",
+            "2026-07-11",
+            "2026-07-12",
+            "2026-07-13",
+            "2026-07-14",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-17",
+            "2026-07-18",
+            "2026-07-19",
+            "2026-07-20",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-25",
+            "2026-07-26",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01",
+            "2026-08-02",
+            "2026-08-03",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-06",
+            "2026-08-07",
+            "2026-08-08",
+            "2026-08-09",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-14",
+            "2026-08-15",
+            "2026-08-16",
+            "2026-08-17",
+            "2026-08-18",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-22",
+            "2026-08-23",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-28",
+            "2026-08-29",
+            "2026-08-30",
+            "2026-08-31",
+            "2026-09-01",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-04",
+            "2026-09-05",
+            "2026-09-06",
+            "2026-09-07",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-12",
+            "2026-09-13",
+            "2026-09-14",
+            "2026-09-15",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-18",
+            "2026-09-19",
+            "2026-09-20",
+            "2026-09-21",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-25",
+            "2026-09-26",
+            "2026-09-27",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-01"
+          ]
+        },
+        "2号店": {
+          "rows": 7613,
+          "min": "2026-04-18T00:00:00Z",
+          "max": "2026-10-01T00:00:00Z",
+          "days": [
+            "2026-04-18",
+            "2026-04-19",
+            "2026-04-20",
+            "2026-04-21",
+            "2026-04-22",
+            "2026-04-23",
+            "2026-04-24",
+            "2026-04-25",
+            "2026-04-26",
+            "2026-04-27",
+            "2026-04-28",
+            "2026-04-29",
+            "2026-04-30",
+            "2026-05-01",
+            "2026-05-02",
+            "2026-05-03",
+            "2026-05-04",
+            "2026-05-05",
+            "2026-05-06",
+            "2026-05-07",
+            "2026-05-08",
+            "2026-05-09",
+            "2026-05-10",
+            "2026-05-11",
+            "2026-05-12",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-16",
+            "2026-05-17",
+            "2026-05-18",
+            "2026-05-19",
+            "2026-05-20",
+            "2026-05-21",
+            "2026-05-22",
+            "2026-05-23",
+            "2026-05-24",
+            "2026-05-25",
+            "2026-05-26",
+            "2026-05-27",
+            "2026-05-28",
+            "2026-05-29",
+            "2026-05-30",
+            "2026-05-31",
+            "2026-06-01",
+            "2026-06-02",
+            "2026-06-03",
+            "2026-06-04",
+            "2026-06-05",
+            "2026-06-06",
+            "2026-06-07",
+            "2026-06-08",
+            "2026-06-09",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-12",
+            "2026-06-13",
+            "2026-06-14",
+            "2026-06-15",
+            "2026-06-16",
+            "2026-06-17",
+            "2026-06-18",
+            "2026-06-19",
+            "2026-06-20",
+            "2026-06-21",
+            "2026-06-22",
+            "2026-06-23",
+            "2026-06-24",
+            "2026-06-25",
+            "2026-06-26",
+            "2026-06-27",
+            "2026-06-28",
+            "2026-06-29",
+            "2026-06-30",
+            "2026-07-01",
+            "2026-07-02",
+            "2026-07-03",
+            "2026-07-04",
+            "2026-07-05",
+            "2026-07-06",
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-10",
+            "2026-07-11",
+            "2026-07-12",
+            "2026-07-13",
+            "2026-07-14",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-17",
+            "2026-07-18",
+            "2026-07-19",
+            "2026-07-20",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-25",
+            "2026-07-26",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01",
+            "2026-08-02",
+            "2026-08-03",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-06",
+            "2026-08-07",
+            "2026-08-08",
+            "2026-08-09",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-14",
+            "2026-08-15",
+            "2026-08-16",
+            "2026-08-17",
+            "2026-08-18",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-22",
+            "2026-08-23",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-28",
+            "2026-08-29",
+            "2026-08-30",
+            "2026-08-31",
+            "2026-09-01",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-04",
+            "2026-09-05",
+            "2026-09-06",
+            "2026-09-07",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-12",
+            "2026-09-13",
+            "2026-09-14",
+            "2026-09-15",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-18",
+            "2026-09-19",
+            "2026-09-20",
+            "2026-09-21",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-25",
+            "2026-09-26",
+            "2026-09-27",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-01"
+          ]
+        }
+      },
+      "numeric": {
+        "atc": {
+          "sum": 18145,
+          "zero": 11279,
+          "nonzero": 6380,
+          "min": 0,
+          "max": 38
+        },
+        "views": {
+          "sum": 7358292,
+          "zero": 0,
+          "nonzero": 17659,
+          "min": 1,
+          "max": 24677
+        },
+        "clicks": {
+          "sum": 132605,
+          "zero": 5655,
+          "nonzero": 12004,
+          "min": 0,
+          "max": 139
+        },
+        "orders": {
+          "sum": 3927,
+          "zero": 15105,
+          "nonzero": 2554,
+          "min": 0,
+          "max": 12
+        },
+        "spends": {
+          "sum": 41099.819999999454,
+          "zero": 5655,
+          "nonzero": 12004,
+          "min": 0,
+          "max": 36.67
+        },
+        "revenue": {
+          "sum": 180574.7599999996,
+          "zero": 15105,
+          "nonzero": 2554,
+          "min": 0,
+          "max": 593.28
+        },
+        "campaignBudget": {
+          "sum": 224083,
+          "zero": 0,
+          "nonzero": 17659,
+          "min": 5,
+          "max": 35
+        }
+      },
+      "groups": {}
+    },
+    "ad_skus": {
+      "rows": 362,
+      "byStore": {
+        "2号店": {
+          "rows": 217,
+          "min": "2026-09-01T00:00:00Z",
+          "max": "2026-09-01T00:00:00Z",
+          "days": [
+            "2026-09-01"
+          ]
+        },
+        "1号店": {
+          "rows": 145,
+          "min": "2026-09-01T00:00:00Z",
+          "max": "2026-09-01T00:00:00Z",
+          "days": [
+            "2026-09-01"
+          ]
+        }
+      },
+      "numeric": {
+        "atc": {
+          "sum": 1175,
+          "zero": 263,
+          "nonzero": 99,
+          "min": 0,
+          "max": 92
+        },
+        "views": {
+          "sum": 333603,
+          "zero": 227,
+          "nonzero": 135,
+          "min": 0,
+          "max": 31406
+        },
+        "clicks": {
+          "sum": 7532,
+          "zero": 238,
+          "nonzero": 124,
+          "min": 0,
+          "max": 599
+        },
+        "orders": {
+          "sum": 233,
+          "zero": 304,
+          "nonzero": 58,
+          "min": 0,
+          "max": 24
+        },
+        "spends": {
+          "sum": 2326.559999999998,
+          "zero": 238,
+          "nonzero": 124,
+          "min": 0,
+          "max": 262.4
+        },
+        "revenue": {
+          "sum": 11225.039999999999,
+          "zero": 304,
+          "nonzero": 58,
+          "min": 0,
+          "max": 1352.85
+        }
+      },
+      "groups": {}
+    },
+    "orders": {
+      "rows": 7273,
+      "byStore": {
+        "2号店": {
+          "rows": 1741,
+          "min": "2026-04-18T10:28:21Z",
+          "max": "2026-10-01T11:42:42Z",
+          "days": [
+            "2026-04-18",
+            "2026-04-19",
+            "2026-04-20",
+            "2026-04-21",
+            "2026-04-23",
+            "2026-04-24",
+            "2026-04-25",
+            "2026-04-26",
+            "2026-04-27",
+            "2026-04-28",
+            "2026-04-29",
+            "2026-04-30",
+            "2026-05-01",
+            "2026-05-02",
+            "2026-05-03",
+            "2026-05-04",
+            "2026-05-05",
+            "2026-05-06",
+            "2026-05-07",
+            "2026-05-08",
+            "2026-05-09",
+            "2026-05-10",
+            "2026-05-11",
+            "2026-05-12",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-16",
+            "2026-05-17",
+            "2026-05-18",
+            "2026-05-19",
+            "2026-05-20",
+            "2026-05-21",
+            "2026-05-22",
+            "2026-05-23",
+            "2026-05-24",
+            "2026-05-25",
+            "2026-05-26",
+            "2026-05-27",
+            "2026-05-28",
+            "2026-05-29",
+            "2026-05-30",
+            "2026-05-31",
+            "2026-06-01",
+            "2026-06-02",
+            "2026-06-03",
+            "2026-06-04",
+            "2026-06-05",
+            "2026-06-06",
+            "2026-06-07",
+            "2026-06-08",
+            "2026-06-09",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-12",
+            "2026-06-13",
+            "2026-06-14",
+            "2026-06-15",
+            "2026-06-16",
+            "2026-06-17",
+            "2026-06-18",
+            "2026-06-19",
+            "2026-06-20",
+            "2026-06-21",
+            "2026-06-22",
+            "2026-06-23",
+            "2026-06-24",
+            "2026-06-25",
+            "2026-06-26",
+            "2026-06-27",
+            "2026-06-28",
+            "2026-06-29",
+            "2026-06-30",
+            "2026-07-01",
+            "2026-07-02",
+            "2026-07-03",
+            "2026-07-04",
+            "2026-07-05",
+            "2026-07-06",
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-10",
+            "2026-07-11",
+            "2026-07-12",
+            "2026-07-13",
+            "2026-07-14",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-17",
+            "2026-07-18",
+            "2026-07-19",
+            "2026-07-20",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-25",
+            "2026-07-26",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01",
+            "2026-08-02",
+            "2026-08-03",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-06",
+            "2026-08-07",
+            "2026-08-08",
+            "2026-08-09",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-14",
+            "2026-08-15",
+            "2026-08-16",
+            "2026-08-17",
+            "2026-08-18",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-22",
+            "2026-08-23",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-28",
+            "2026-08-29",
+            "2026-08-30",
+            "2026-08-31",
+            "2026-09-01",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-04",
+            "2026-09-05",
+            "2026-09-06",
+            "2026-09-07",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-12",
+            "2026-09-13",
+            "2026-09-14",
+            "2026-09-15",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-18",
+            "2026-09-19",
+            "2026-09-20",
+            "2026-09-21",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-25",
+            "2026-09-26",
+            "2026-09-27",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-01"
+          ]
+        },
+        "1号店": {
+          "rows": 5532,
+          "min": "2025-12-06T14:55:16Z",
+          "max": "2026-10-01T10:19:25Z",
+          "days": [
+            "2025-12-06",
+            "2025-12-10",
+            "2025-12-11",
+            "2025-12-12",
+            "2025-12-14",
+            "2025-12-15",
+            "2025-12-17",
+            "2025-12-18",
+            "2025-12-19",
+            "2025-12-20",
+            "2025-12-21",
+            "2025-12-22",
+            "2025-12-23",
+            "2025-12-24",
+            "2025-12-25",
+            "2025-12-26",
+            "2025-12-27",
+            "2025-12-28",
+            "2025-12-29",
+            "2025-12-30",
+            "2025-12-31",
+            "2026-01-01",
+            "2026-01-02",
+            "2026-01-03",
+            "2026-01-04",
+            "2026-01-05",
+            "2026-01-06",
+            "2026-01-07",
+            "2026-01-08",
+            "2026-01-09",
+            "2026-01-10",
+            "2026-01-11",
+            "2026-01-12",
+            "2026-01-13",
+            "2026-01-14",
+            "2026-01-15",
+            "2026-01-16",
+            "2026-01-17",
+            "2026-01-18",
+            "2026-01-19",
+            "2026-01-20",
+            "2026-01-21",
+            "2026-01-22",
+            "2026-01-23",
+            "2026-01-24",
+            "2026-01-25",
+            "2026-01-26",
+            "2026-01-27",
+            "2026-01-28",
+            "2026-01-29",
+            "2026-01-30",
+            "2026-01-31",
+            "2026-02-01",
+            "2026-02-02",
+            "2026-02-03",
+            "2026-02-04",
+            "2026-02-05",
+            "2026-02-06",
+            "2026-02-07",
+            "2026-02-08",
+            "2026-02-09",
+            "2026-02-10",
+            "2026-02-11",
+            "2026-02-12",
+            "2026-02-13",
+            "2026-02-14",
+            "2026-02-15",
+            "2026-02-16",
+            "2026-02-17",
+            "2026-02-18",
+            "2026-02-19",
+            "2026-02-20",
+            "2026-02-21",
+            "2026-02-22",
+            "2026-02-23",
+            "2026-02-24",
+            "2026-02-25",
+            "2026-02-26",
+            "2026-02-27",
+            "2026-02-28",
+            "2026-03-01",
+            "2026-03-02",
+            "2026-03-03",
+            "2026-03-04",
+            "2026-03-05",
+            "2026-03-06",
+            "2026-03-07",
+            "2026-03-08",
+            "2026-03-09",
+            "2026-03-10",
+            "2026-03-11",
+            "2026-03-12",
+            "2026-03-13",
+            "2026-03-14",
+            "2026-03-15",
+            "2026-03-16",
+            "2026-03-17",
+            "2026-03-18",
+            "2026-03-19",
+            "2026-03-20",
+            "2026-03-21",
+            "2026-03-22",
+            "2026-03-23",
+            "2026-03-24",
+            "2026-03-25",
+            "2026-03-26",
+            "2026-03-27",
+            "2026-03-28",
+            "2026-03-29",
+            "2026-03-30",
+            "2026-03-31",
+            "2026-04-01",
+            "2026-04-02",
+            "2026-04-03",
+            "2026-04-04",
+            "2026-04-05",
+            "2026-04-06",
+            "2026-04-07",
+            "2026-04-08",
+            "2026-04-09",
+            "2026-04-10",
+            "2026-04-11",
+            "2026-04-12",
+            "2026-04-13",
+            "2026-04-14",
+            "2026-04-15",
+            "2026-04-16",
+            "2026-04-17",
+            "2026-04-18",
+            "2026-04-19",
+            "2026-04-20",
+            "2026-04-21",
+            "2026-04-22",
+            "2026-04-23",
+            "2026-04-24",
+            "2026-04-25",
+            "2026-04-26",
+            "2026-04-27",
+            "2026-04-28",
+            "2026-04-29",
+            "2026-04-30",
+            "2026-05-01",
+            "2026-05-02",
+            "2026-05-03",
+            "2026-05-04",
+            "2026-05-05",
+            "2026-05-06",
+            "2026-05-07",
+            "2026-05-08",
+            "2026-05-09",
+            "2026-05-10",
+            "2026-05-11",
+            "2026-05-12",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-16",
+            "2026-05-17",
+            "2026-05-18",
+            "2026-05-19",
+            "2026-05-20",
+            "2026-05-21",
+            "2026-05-22",
+            "2026-05-23",
+            "2026-05-24",
+            "2026-05-25",
+            "2026-05-26",
+            "2026-05-27",
+            "2026-05-28",
+            "2026-05-29",
+            "2026-05-30",
+            "2026-05-31",
+            "2026-06-01",
+            "2026-06-02",
+            "2026-06-03",
+            "2026-06-04",
+            "2026-06-05",
+            "2026-06-06",
+            "2026-06-07",
+            "2026-06-08",
+            "2026-06-09",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-12",
+            "2026-06-13",
+            "2026-06-14",
+            "2026-06-15",
+            "2026-06-16",
+            "2026-06-17",
+            "2026-06-18",
+            "2026-06-19",
+            "2026-06-20",
+            "2026-06-21",
+            "2026-06-22",
+            "2026-06-23",
+            "2026-06-24",
+            "2026-06-25",
+            "2026-06-26",
+            "2026-06-27",
+            "2026-06-28",
+            "2026-06-29",
+            "2026-06-30",
+            "2026-07-01",
+            "2026-07-02",
+            "2026-07-03",
+            "2026-07-04",
+            "2026-07-05",
+            "2026-07-06",
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-10",
+            "2026-07-11",
+            "2026-07-12",
+            "2026-07-13",
+            "2026-07-14",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-17",
+            "2026-07-18",
+            "2026-07-19",
+            "2026-07-20",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-25",
+            "2026-07-26",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01",
+            "2026-08-02",
+            "2026-08-03",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-06",
+            "2026-08-07",
+            "2026-08-08",
+            "2026-08-09",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-14",
+            "2026-08-15",
+            "2026-08-16",
+            "2026-08-17",
+            "2026-08-18",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-22",
+            "2026-08-23",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-28",
+            "2026-08-29",
+            "2026-08-30",
+            "2026-08-31",
+            "2026-09-01",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-04",
+            "2026-09-05",
+            "2026-09-06",
+            "2026-09-07",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-12",
+            "2026-09-13",
+            "2026-09-14",
+            "2026-09-15",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-18",
+            "2026-09-19",
+            "2026-09-20",
+            "2026-09-21",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-25",
+            "2026-09-26",
+            "2026-09-27",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-01"
+          ]
+        }
+      },
+      "numeric": {
+        "fees": {
+          "sum": 0,
+          "zero": 7273,
+          "nonzero": 0,
+          "min": 0,
+          "max": 0
+        },
+        "price": {
+          "sum": 349375.3804550171,
+          "zero": 0,
+          "nonzero": 7273,
+          "min": 15.800000190734863,
+          "max": 216
+        }
+      },
+      "groups": {
+        "status": {
+          "Could Not Be Delivered": {
+            "rows": 378,
+            "price": 18199.09006500244,
+            "fees": 0
+          },
+          "Delivered": {
+            "rows": 6297,
+            "price": 294006.21035575867,
+            "fees": 0
+          },
+          "CIR": {
+            "rows": 301,
+            "price": 22355.350009918213,
+            "fees": 0
+          },
+          "Cancelled": {
+            "rows": 257,
+            "price": 12958.020027160645,
+            "fees": 0
+          },
+          "Shipped": {
+            "rows": 33,
+            "price": 1563.7399978637695,
+            "fees": 0
+          },
+          "Pending Confirmation": {
+            "rows": 2,
+            "price": 60.09000015258789,
+            "fees": 0
+          },
+          "Processing": {
+            "rows": 5,
+            "price": 232.8799991607666,
+            "fees": 0
+          }
+        }
+      }
+    },
+    "transactions": {
+      "rows": 7690,
+      "byStore": {
+        "2号店": {
+          "rows": 1893,
+          "min": "2026-04-22T00:00:00Z",
+          "max": "2026-09-30T00:00:00Z",
+          "days": [
+            "2026-04-22",
+            "2026-04-29",
+            "2026-04-30",
+            "2026-05-06",
+            "2026-05-13",
+            "2026-05-20",
+            "2026-05-27",
+            "2026-05-28",
+            "2026-05-31",
+            "2026-06-04",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-17",
+            "2026-06-24",
+            "2026-06-25",
+            "2026-06-30",
+            "2026-07-02",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-05",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-31",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-16",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-30"
+          ]
+        },
+        "1号店": {
+          "rows": 5797,
+          "min": "2025-12-17T00:00:00Z",
+          "max": "2026-09-30T00:00:00Z",
+          "days": [
+            "2025-12-17",
+            "2025-12-24",
+            "2025-12-31",
+            "2026-01-07",
+            "2026-01-14",
+            "2026-01-15",
+            "2026-01-21",
+            "2026-01-22",
+            "2026-01-28",
+            "2026-01-29",
+            "2026-01-31",
+            "2026-02-04",
+            "2026-02-05",
+            "2026-02-11",
+            "2026-02-12",
+            "2026-02-19",
+            "2026-02-25",
+            "2026-02-26",
+            "2026-02-28",
+            "2026-03-04",
+            "2026-03-05",
+            "2026-03-11",
+            "2026-03-12",
+            "2026-03-18",
+            "2026-03-19",
+            "2026-03-25",
+            "2026-03-26",
+            "2026-03-31",
+            "2026-04-02",
+            "2026-04-08",
+            "2026-04-09",
+            "2026-04-15",
+            "2026-04-16",
+            "2026-04-22",
+            "2026-04-23",
+            "2026-04-29",
+            "2026-04-30",
+            "2026-05-06",
+            "2026-05-07",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-20",
+            "2026-05-21",
+            "2026-05-27",
+            "2026-05-28",
+            "2026-05-31",
+            "2026-06-01",
+            "2026-06-04",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-17",
+            "2026-06-18",
+            "2026-06-24",
+            "2026-06-25",
+            "2026-06-30",
+            "2026-07-02",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-03",
+            "2026-08-05",
+            "2026-08-06",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-31",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-30"
+          ]
+        }
+      },
+      "numeric": {
+        "fbnFee": {
+          "sum": -60680.59999999981,
+          "zero": 1444,
+          "nonzero": 6246,
+          "min": -63,
+          "max": 0
+        },
+        "subtotal": {
+          "sum": 2697.9799999999154,
+          "zero": 3,
+          "nonzero": 7687,
+          "min": -7028.36,
+          "max": 505.17
+        },
+        "fbnFeeVat": {
+          "sum": -9107.040000000587,
+          "zero": 1444,
+          "nonzero": 6246,
+          "min": -9.45,
+          "max": 0
+        },
+        "otherFees": {
+          "sum": -178409.17999999996,
+          "zero": 7557,
+          "nonzero": 133,
+          "min": -7028.36,
+          "max": 0
+        },
+        "totalFees": {
+          "sum": -111858.47000000176,
+          "zero": 136,
+          "nonzero": 7554,
+          "min": -188.78,
+          "max": 116.97
+        },
+        "netProceeds": {
+          "sum": 292965.629999998,
+          "zero": 1689,
+          "nonzero": 6001,
+          "min": -648,
+          "max": 648
+        },
+        "referralFee": {
+          "sum": -36316.58999999993,
+          "zero": 1448,
+          "nonzero": 6242,
+          "min": -97.2,
+          "max": 97.2
+        },
+        "referralFeeVat": {
+          "sum": -5450.699999999994,
+          "zero": 1448,
+          "nonzero": 6242,
+          "min": -14.58,
+          "max": 14.58
+        }
+      },
+      "groups": {
+        "type": {
+          "balance_transfer": {
+            "rows": 14,
+            "netProceeds": 0,
+            "totalFees": 0,
+            "otherFees": -1600.3100000000004,
+            "subtotal": -1600.3100000000004
+          },
+          "statement_fee": {
+            "rows": 74,
+            "netProceeds": 0,
+            "totalFees": 0,
+            "otherFees": -45171.689999999995,
+            "subtotal": -45171.689999999995
+          },
+          "order": {
+            "rows": 6360,
+            "netProceeds": 302215.7099999972,
+            "totalFees": -104861.70000000129,
+            "otherFees": 0,
+            "subtotal": 197354.00999999672
+          },
+          "order_update": {
+            "rows": 1194,
+            "netProceeds": -9250.08,
+            "totalFees": -6996.770000000074,
+            "otherFees": 0,
+            "subtotal": -16246.85000000015
+          },
+          "payment": {
+            "rows": 48,
+            "netProceeds": 0,
+            "totalFees": 0,
+            "otherFees": -131637.17999999996,
+            "subtotal": -131637.17999999996
+          }
+        }
+      },
+      "arithmetic": {
+        "netPlusFeesPlusOtherMinusTotal": 9.00612917575927e-13,
+        "mismatchRows": 0
+      }
+    },
+    "catalog": {
+      "rows": 7546,
+      "byStore": {
+        "2号店": {
+          "rows": 5311,
+          "min": "2026-06-28T00:00:00Z",
+          "max": "2026-10-01T00:00:00Z",
+          "days": [
+            "2026-06-28",
+            "2026-07-01",
+            "2026-07-05",
+            "2026-07-06",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01",
+            "2026-08-02",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-08",
+            "2026-08-09",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-14",
+            "2026-08-15",
+            "2026-08-17",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-09-05",
+            "2026-09-06",
+            "2026-09-07",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-12",
+            "2026-09-13",
+            "2026-09-17",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-25",
+            "2026-09-26",
+            "2026-09-27",
+            "2026-09-30",
+            "2026-10-01"
+          ]
+        },
+        "1号店": {
+          "rows": 2235,
+          "min": "2026-06-28T00:00:00Z",
+          "max": "2026-10-01T00:00:00Z",
+          "days": [
+            "2026-06-28",
+            "2026-07-06",
+            "2026-08-17",
+            "2026-09-05",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-25",
+            "2026-09-26",
+            "2026-09-27",
+            "2026-09-30",
+            "2026-10-01"
+          ]
+        }
+      },
+      "numeric": {
+        "gmv": {
+          "sum": 580407.7300000008,
+          "zero": 5518,
+          "nonzero": 2028,
+          "min": 0,
+          "max": 4933.87
+        },
+        "gvs": {
+          "sum": 514041,
+          "zero": 3915,
+          "nonzero": 3631,
+          "min": 0,
+          "max": 5329
+        },
+        "price": {
+          "sum": 448226.8400000037,
+          "zero": 39,
+          "nonzero": 7507,
+          "min": 0,
+          "max": 245
+        },
+        "fbnStock": {
+          "sum": 61133,
+          "zero": 3547,
+          "nonzero": 3999,
+          "min": -1,
+          "max": 155
+        },
+        "fbpStock": {
+          "sum": 6000,
+          "zero": 7246,
+          "nonzero": 300,
+          "min": 0,
+          "max": 20
+        },
+        "unitsSold": {
+          "sum": 11072,
+          "zero": 5666,
+          "nonzero": 1880,
+          "min": 0,
+          "max": 107
+        },
+        "liveStatus": {
+          "sum": 3514,
+          "zero": 3980,
+          "nonzero": 3566,
+          "min": -1,
+          "max": 1
+        }
+      },
+      "groups": {}
+    },
+    "statements": {
+      "rows": 305,
+      "byStore": {
+        "2号店": {
+          "rows": 109,
+          "min": "2026-04-22T00:00:00Z",
+          "max": "2026-09-30T00:00:00Z",
+          "days": [
+            "2026-04-22",
+            "2026-04-29",
+            "2026-04-30",
+            "2026-05-06",
+            "2026-05-13",
+            "2026-05-20",
+            "2026-05-23",
+            "2026-05-27",
+            "2026-05-28",
+            "2026-05-31",
+            "2026-06-04",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-17",
+            "2026-06-24",
+            "2026-06-25",
+            "2026-06-30",
+            "2026-07-01",
+            "2026-07-02",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-17",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-26",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01",
+            "2026-08-05",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-31",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-05",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-16",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-30"
+          ]
+        },
+        "1号店": {
+          "rows": 196,
+          "min": "2025-12-17T00:00:00Z",
+          "max": "2026-09-30T00:00:00Z",
+          "days": [
+            "2025-12-17",
+            "2025-12-24",
+            "2025-12-31",
+            "2026-01-07",
+            "2026-01-14",
+            "2026-01-15",
+            "2026-01-21",
+            "2026-01-22",
+            "2026-01-28",
+            "2026-01-29",
+            "2026-01-31",
+            "2026-02-04",
+            "2026-02-05",
+            "2026-02-11",
+            "2026-02-12",
+            "2026-02-19",
+            "2026-02-25",
+            "2026-02-26",
+            "2026-02-28",
+            "2026-03-04",
+            "2026-03-05",
+            "2026-03-11",
+            "2026-03-12",
+            "2026-03-18",
+            "2026-03-19",
+            "2026-03-25",
+            "2026-03-26",
+            "2026-03-31",
+            "2026-04-02",
+            "2026-04-08",
+            "2026-04-09",
+            "2026-04-15",
+            "2026-04-16",
+            "2026-04-22",
+            "2026-04-23",
+            "2026-04-29",
+            "2026-04-30",
+            "2026-05-01",
+            "2026-05-06",
+            "2026-05-07",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-20",
+            "2026-05-21",
+            "2026-05-23",
+            "2026-05-27",
+            "2026-05-28",
+            "2026-05-31",
+            "2026-06-01",
+            "2026-06-04",
+            "2026-06-05",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-17",
+            "2026-06-18",
+            "2026-06-24",
+            "2026-06-25",
+            "2026-06-30",
+            "2026-07-01",
+            "2026-07-02",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-17",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-26",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01",
+            "2026-08-02",
+            "2026-08-03",
+            "2026-08-05",
+            "2026-08-06",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-31",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-05",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-19",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-30"
+          ]
+        }
+      },
+      "numeric": {
+        "fees": {
+          "sum": -137681.74,
+          "zero": 212,
+          "nonzero": 93,
+          "min": -4646.59,
+          "max": 6.45
+        },
+        "others": {
+          "sum": -187188.04000000007,
+          "zero": 131,
+          "nonzero": 174,
+          "min": -7028.36,
+          "max": 513.62
+        },
+        "totalDue": {
+          "sum": -31904.15,
+          "zero": 38,
+          "nonzero": 267,
+          "min": -7028.36,
+          "max": 5599.68
+        },
+        "netProceeds": {
+          "sum": 292965.63000000006,
+          "zero": 229,
+          "nonzero": 76,
+          "min": 0,
+          "max": 10246.27
+        }
+      },
+      "groups": {
+        "type": {
+          "payment_request": {
+            "rows": 15,
+            "netProceeds": 0,
+            "fees": 0,
+            "others": -34050.91,
+            "totalDue": -34050.91
+          },
+          "statement": {
+            "rows": 97,
+            "netProceeds": 292965.63000000006,
+            "fees": -137681.74,
+            "others": 0,
+            "totalDue": 155283.88999999998
+          },
+          "invoice": {
+            "rows": 80,
+            "netProceeds": 0,
+            "fees": 0,
+            "others": -20674.3,
+            "totalDue": -20674.3
+          },
+          "payout": {
+            "rows": 85,
+            "netProceeds": 0,
+            "fees": 0,
+            "others": -132462.82999999996,
+            "totalDue": -132462.82999999996
+          },
+          "balance_transfer": {
+            "rows": 28,
+            "netProceeds": 0,
+            "fees": 0,
+            "others": 0,
+            "totalDue": 0
+          }
+        },
+        "currency": {
+          "SAR": {
+            "rows": 305,
+            "netProceeds": 292965.63000000006,
+            "fees": -137681.74,
+            "others": -187188.04000000007,
+            "totalDue": -31904.15
+          }
+        }
+      },
+      "arithmetic": {
+        "netPlusFeesPlusOtherMinusTotal": -3.183231456205249e-12,
+        "mismatchRows": 0
+      }
+    },
+    "inventory": {
+      "rows": 324,
+      "byStore": {
+        "2号店": {
+          "rows": 135,
+          "min": "2026-10-01T20:41:50Z",
+          "max": "2026-10-01T20:42:12Z",
+          "days": [
+            "2026-10-01"
+          ]
+        },
+        "1号店": {
+          "rows": 189,
+          "min": "2026-10-01T20:42:16Z",
+          "max": "2026-10-01T20:42:21Z",
+          "days": [
+            "2026-10-01"
+          ]
+        }
+      },
+      "numeric": {
+        "price": {
+          "sum": 25777.899999999994,
+          "zero": 0,
+          "nonzero": 324,
+          "min": 22.5,
+          "max": 399
+        },
+        "weight": {
+          "sum": 23.67940000000003,
+          "zero": 148,
+          "nonzero": 176,
+          "min": 0,
+          "max": 0.746
+        },
+        "fbnStock": {
+          "sum": 2582,
+          "zero": 167,
+          "nonzero": 157,
+          "min": 0,
+          "max": 147
+        },
+        "fbpStock": {
+          "sum": 500,
+          "zero": 299,
+          "nonzero": 25,
+          "min": 0,
+          "max": 20
+        },
+        "purchasePrice": {
+          "sum": 2379.2541999900013,
+          "zero": 141,
+          "nonzero": 183,
+          "min": 0,
+          "max": 135
+        }
+      },
+      "groups": {
+        "liveStatus": {
+          "0": {
+            "rows": 185,
+            "price": 16296.549999999997
+          },
+          "1": {
+            "rows": 139,
+            "price": 9481.35
+          }
+        },
+        "active": {
+          "0": {
+            "rows": 25,
+            "price": 3329.1000000000004
+          },
+          "1": {
+            "rows": 299,
+            "price": 22448.799999999992
+          }
+        }
+      }
+    },
+    "campaigns": {
+      "rows": 176,
+      "byStore": {
+        "2号店": {
+          "rows": 94,
+          "min": "2026-10-01T20:42:41Z",
+          "max": "2026-10-01T20:46:03Z",
+          "days": [
+            "2026-10-01"
+          ]
+        },
+        "1号店": {
+          "rows": 82,
+          "min": "2026-10-01T20:34:53Z",
+          "max": "2026-10-01T20:37:48Z",
+          "days": [
+            "2026-10-01"
+          ]
+        }
+      },
+      "numeric": {
+        "budget": {
+          "sum": 2158,
+          "zero": 0,
+          "nonzero": 176,
+          "min": 5,
+          "max": 35
+        }
+      },
+      "groups": {
+        "status": {
+          "paused": {
+            "rows": 104,
+            "budget": 1454
+          },
+          "live": {
+            "rows": 71,
+            "budget": 689
+          },
+          "archived": {
+            "rows": 1,
+            "budget": 15
+          }
+        }
+      }
+    },
+    "procurement": {
+      "rows": 4042,
+      "byStore": {
+        "2号店": {
+          "rows": 2180,
+          "min": "2026-07-10T00:00:00Z",
+          "max": "2026-10-01T00:00:00Z",
+          "days": [
+            "2026-07-10",
+            "2026-07-17",
+            "2026-07-18",
+            "2026-07-19",
+            "2026-07-20",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-25",
+            "2026-07-26",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01",
+            "2026-08-02",
+            "2026-08-03",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-06",
+            "2026-08-07",
+            "2026-08-08",
+            "2026-08-09",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-14",
+            "2026-08-15",
+            "2026-08-16",
+            "2026-08-17",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-22",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-28",
+            "2026-08-29",
+            "2026-08-30",
+            "2026-08-31",
+            "2026-09-01",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-04",
+            "2026-09-05",
+            "2026-09-06",
+            "2026-09-07",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-12",
+            "2026-09-13",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-19",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-25",
+            "2026-09-26",
+            "2026-09-27",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-01"
+          ]
+        },
+        "1号店": {
+          "rows": 1862,
+          "min": "2026-07-10T00:00:00Z",
+          "max": "2026-10-01T00:00:00Z",
+          "days": [
+            "2026-07-10",
+            "2026-07-17",
+            "2026-07-18",
+            "2026-07-19",
+            "2026-07-20",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-25",
+            "2026-07-26",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01",
+            "2026-08-02",
+            "2026-08-03",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-06",
+            "2026-08-07",
+            "2026-08-08",
+            "2026-08-09",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-14",
+            "2026-08-15",
+            "2026-08-16",
+            "2026-08-17",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-22",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-28",
+            "2026-08-29",
+            "2026-08-30",
+            "2026-08-31",
+            "2026-09-01",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-04",
+            "2026-09-05",
+            "2026-09-06",
+            "2026-09-07",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-12",
+            "2026-09-13",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-19",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-25",
+            "2026-09-26",
+            "2026-09-27",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-01"
+          ]
+        }
+      },
+      "numeric": {
+        "airQty": {
+          "sum": 17686,
+          "zero": 2762,
+          "nonzero": 1280,
+          "min": 0,
+          "max": 146
+        },
+        "seaQty": {
+          "sum": 118051,
+          "zero": 0,
+          "nonzero": 4042,
+          "min": 20,
+          "max": 535
+        },
+        "fbnStock": {
+          "sum": 39182,
+          "zero": 470,
+          "nonzero": 3572,
+          "min": -1,
+          "max": 88
+        },
+        "dailySales": {
+          "sum": 2560.3299999999867,
+          "zero": 0,
+          "nonzero": 4042,
+          "min": 0.06,
+          "max": 12.14
+        }
+      },
+      "groups": {
+        "status": {
+          "0": {
+            "rows": 4042
+          }
+        }
+      }
+    },
+    "purchases": {
+      "rows": 100,
+      "byStore": {
+        "1号店": {
+          "rows": 66,
+          "min": "2025-11-27T00:00:00Z",
+          "max": "2026-08-09T00:00:00Z",
+          "days": [
+            "2025-11-27",
+            "2025-12-08",
+            "2025-12-11",
+            "2025-12-13",
+            "2025-12-18",
+            "2025-12-27",
+            "2026-01-04",
+            "2026-01-10",
+            "2026-01-14",
+            "2026-01-18",
+            "2026-01-19",
+            "2026-01-26",
+            "2026-01-29",
+            "2026-01-30",
+            "2026-02-01",
+            "2026-02-04",
+            "2026-02-06",
+            "2026-02-07",
+            "2026-02-09",
+            "2026-03-01",
+            "2026-03-03",
+            "2026-03-06",
+            "2026-03-11",
+            "2026-03-15",
+            "2026-03-16",
+            "2026-03-18",
+            "2026-03-19",
+            "2026-03-29",
+            "2026-03-31",
+            "2026-04-01",
+            "2026-04-02",
+            "2026-04-04",
+            "2026-04-10",
+            "2026-04-13",
+            "2026-04-16",
+            "2026-04-23",
+            "2026-04-25",
+            "2026-04-28",
+            "2026-04-29",
+            "2026-05-05",
+            "2026-05-12",
+            "2026-05-17",
+            "2026-05-19",
+            "2026-05-22",
+            "2026-05-27",
+            "2026-06-07",
+            "2026-06-12",
+            "2026-06-27",
+            "2026-07-01",
+            "2026-07-05",
+            "2026-07-06",
+            "2026-07-07",
+            "2026-07-20",
+            "2026-07-22",
+            "2026-07-26",
+            "2026-08-02",
+            "2026-08-09"
+          ]
+        },
+        "2号店": {
+          "rows": 34,
+          "min": "2026-04-01T00:00:00Z",
+          "max": "2026-07-29T00:00:00Z",
+          "days": [
+            "2026-04-01",
+            "2026-04-07",
+            "2026-04-08",
+            "2026-04-11",
+            "2026-04-17",
+            "2026-04-24",
+            "2026-04-29",
+            "2026-05-07",
+            "2026-05-08",
+            "2026-05-11",
+            "2026-05-16",
+            "2026-05-20",
+            "2026-05-30",
+            "2026-06-03",
+            "2026-06-06",
+            "2026-06-14",
+            "2026-06-16",
+            "2026-06-17",
+            "2026-06-22",
+            "2026-06-24",
+            "2026-07-04",
+            "2026-07-07",
+            "2026-07-12",
+            "2026-07-17",
+            "2026-07-26",
+            "2026-07-29"
+          ]
+        }
+      },
+      "numeric": {
+        "units": {
+          "sum": 8288,
+          "zero": 0,
+          "nonzero": 100,
+          "min": 18,
+          "max": 233
+        },
+        "volume": {
+          "sum": 0,
+          "zero": 100,
+          "nonzero": 0,
+          "min": 0,
+          "max": 0
+        },
+        "weight": {
+          "sum": 1072.5499999999997,
+          "zero": 0,
+          "nonzero": 100,
+          "min": 1.6,
+          "max": 46.4
+        },
+        "freight": {
+          "sum": 74685.6,
+          "zero": 4,
+          "nonzero": 96,
+          "min": 0,
+          "max": 3543.5
+        }
+      },
+      "groups": {}
+    },
+    "purchase_items": {
+      "rows": 532,
+      "byStore": {
+        "1号店": {
+          "rows": 351,
+          "min": "2025-11-27T00:00:00Z",
+          "max": "2026-08-09T00:00:00Z",
+          "days": [
+            "2025-11-27",
+            "2025-12-08",
+            "2025-12-11",
+            "2025-12-13",
+            "2025-12-18",
+            "2025-12-27",
+            "2026-01-04",
+            "2026-01-10",
+            "2026-01-14",
+            "2026-01-18",
+            "2026-01-19",
+            "2026-01-26",
+            "2026-01-29",
+            "2026-01-30",
+            "2026-02-01",
+            "2026-02-04",
+            "2026-02-06",
+            "2026-02-07",
+            "2026-02-09",
+            "2026-03-01",
+            "2026-03-03",
+            "2026-03-06",
+            "2026-03-11",
+            "2026-03-15",
+            "2026-03-16",
+            "2026-03-18",
+            "2026-03-19",
+            "2026-03-29",
+            "2026-03-31",
+            "2026-04-01",
+            "2026-04-02",
+            "2026-04-04",
+            "2026-04-10",
+            "2026-04-13",
+            "2026-04-16",
+            "2026-04-23",
+            "2026-04-25",
+            "2026-04-28",
+            "2026-04-29",
+            "2026-05-05",
+            "2026-05-12",
+            "2026-05-17",
+            "2026-05-19",
+            "2026-05-22",
+            "2026-05-27",
+            "2026-06-07",
+            "2026-06-12",
+            "2026-06-27",
+            "2026-07-01",
+            "2026-07-05",
+            "2026-07-06",
+            "2026-07-07",
+            "2026-07-20",
+            "2026-07-22",
+            "2026-07-26",
+            "2026-08-02",
+            "2026-08-09"
+          ]
+        },
+        "2号店": {
+          "rows": 181,
+          "min": "2026-04-01T00:00:00Z",
+          "max": "2026-07-29T00:00:00Z",
+          "days": [
+            "2026-04-01",
+            "2026-04-07",
+            "2026-04-08",
+            "2026-04-11",
+            "2026-04-17",
+            "2026-04-24",
+            "2026-04-29",
+            "2026-05-07",
+            "2026-05-08",
+            "2026-05-11",
+            "2026-05-16",
+            "2026-05-20",
+            "2026-05-30",
+            "2026-06-03",
+            "2026-06-06",
+            "2026-06-14",
+            "2026-06-16",
+            "2026-06-17",
+            "2026-06-22",
+            "2026-06-24",
+            "2026-07-04",
+            "2026-07-07",
+            "2026-07-12",
+            "2026-07-17",
+            "2026-07-26",
+            "2026-07-29"
+          ]
+        }
+      },
+      "numeric": {
+        "units": {
+          "sum": 8288,
+          "zero": 0,
+          "nonzero": 532,
+          "min": 1,
+          "max": 105
+        }
+      },
+      "groups": {}
+    },
+    "promotions": {
+      "rows": 2605,
+      "byStore": {
+        "2号店": {
+          "rows": 1302,
+          "min": "2026-07-07T02:42:52Z",
+          "max": "2026-10-01T18:20:35Z",
+          "days": [
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-17",
+            "2026-07-18",
+            "2026-07-19",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-25",
+            "2026-07-26",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01",
+            "2026-08-02",
+            "2026-08-03",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-07",
+            "2026-08-08",
+            "2026-08-09",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-14",
+            "2026-08-15",
+            "2026-08-17",
+            "2026-08-18",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-22",
+            "2026-08-26",
+            "2026-09-05",
+            "2026-09-06",
+            "2026-09-07",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-12",
+            "2026-09-13",
+            "2026-09-14",
+            "2026-09-17",
+            "2026-09-19",
+            "2026-09-22",
+            "2026-09-24",
+            "2026-09-26",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-01"
+          ]
+        },
+        "1号店": {
+          "rows": 1303,
+          "min": "2026-07-07T02:48:09Z",
+          "max": "2026-10-01T18:21:26Z",
+          "days": [
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-17",
+            "2026-07-18",
+            "2026-07-19",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-25",
+            "2026-07-26",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01",
+            "2026-08-02",
+            "2026-08-03",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-07",
+            "2026-08-08",
+            "2026-08-09",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-14",
+            "2026-08-15",
+            "2026-08-17",
+            "2026-08-18",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-22",
+            "2026-08-26",
+            "2026-09-05",
+            "2026-09-06",
+            "2026-09-07",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-12",
+            "2026-09-13",
+            "2026-09-14",
+            "2026-09-17",
+            "2026-09-19",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-26",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-01"
+          ]
+        }
+      },
+      "numeric": {
+        "itemsSold": {
+          "sum": 2520,
+          "zero": 2595,
+          "nonzero": 10,
+          "min": 0,
+          "max": 777
+        },
+        "discountPct": {
+          "sum": 0,
+          "zero": 2605,
+          "nonzero": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "groups": {
+        "enrolled": {
+          "0": {
+            "rows": 2595,
+            "itemsSold": 0
+          },
+          "1": {
+            "rows": 10,
+            "itemsSold": 2520
+          }
+        },
+        "status": {
+          "ongoing": {
+            "rows": 1267,
+            "itemsSold": 1059
+          },
+          "completed": {
+            "rows": 7,
+            "itemsSold": 1461
+          },
+          "upcoming": {
+            "rows": 1331,
+            "itemsSold": 0
+          }
+        }
+      }
+    },
+    "coupons": {
+      "rows": 76,
+      "byStore": {
+        "2号店": {
+          "rows": 38,
+          "min": "2026-08-03T00:35:04Z",
+          "max": "2026-10-01T18:20:57Z",
+          "days": [
+            "2026-08-03",
+            "2026-08-26",
+            "2026-09-30",
+            "2026-10-01"
+          ]
+        },
+        "1号店": {
+          "rows": 38,
+          "min": "2026-08-03T00:35:13Z",
+          "max": "2026-10-01T18:21:44Z",
+          "days": [
+            "2026-08-03",
+            "2026-08-26",
+            "2026-10-01"
+          ]
+        }
+      },
+      "numeric": {
+        "burnt": {
+          "sum": 0,
+          "zero": 76,
+          "nonzero": 0,
+          "min": 0,
+          "max": 0
+        },
+        "budget": {
+          "sum": 0,
+          "zero": 76,
+          "nonzero": 0,
+          "min": 0,
+          "max": 0
+        },
+        "products": {
+          "sum": 0,
+          "zero": 76,
+          "nonzero": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "groups": {
+        "enrolled": {
+          "0": {
+            "rows": 76,
+            "budget": 0,
+            "burnt": 0
+          }
+        },
+        "status": {
+          "ongoing": {
+            "rows": 70,
+            "budget": 0,
+            "burnt": 0
+          },
+          "upcoming": {
+            "rows": 6,
+            "budget": 0,
+            "burnt": 0
+          }
+        },
+        "type": {
+          "flat": {
+            "rows": 38,
+            "budget": 0,
+            "burnt": 0
+          },
+          "percentage": {
+            "rows": 38,
+            "budget": 0,
+            "burnt": 0
+          }
+        }
+      }
+    },
+    "deal_items": {
+      "rows": 129,
+      "byStore": {
+        "1号店": {
+          "rows": 74,
+          "min": "2026-10-01T18:12:35Z",
+          "max": "2026-10-01T18:12:35Z",
+          "days": [
+            "2026-10-01"
+          ]
+        },
+        "2号店": {
+          "rows": 55,
+          "min": "2026-10-01T20:42:12Z",
+          "max": "2026-10-01T20:42:12Z",
+          "days": [
+            "2026-10-01"
+          ]
+        }
+      },
+      "numeric": {},
+      "groups": {
+        "status": {
+          "ongoing": {
+            "rows": 129
+          }
+        },
+        "skuStatus": {
+          "approved": {
+            "rows": 58
+          },
+          "partially_approved": {
+            "rows": 68
+          },
+          "rejected": {
+            "rows": 3
+          }
+        }
+      }
+    },
+    "competitors": {
+      "rows": 3,
+      "byStore": {
+        "2号店": {
+          "rows": 3,
+          "min": "2026-10-01T20:00:08Z",
+          "max": "2026-10-01T20:00:09Z",
+          "days": [
+            "2026-10-01"
+          ]
+        }
+      },
+      "numeric": {
+        "sold": {
+          "sum": 490,
+          "zero": 0,
+          "nonzero": 3,
+          "min": 20,
+          "max": 370
+        },
+        "price": {
+          "sum": 103.35000000000001,
+          "zero": 0,
+          "nonzero": 3,
+          "min": 29.9,
+          "max": 38.95
+        },
+        "ratingCount": {
+          "sum": 1243,
+          "zero": 0,
+          "nonzero": 3,
+          "min": 3,
+          "max": 1022
+        }
+      },
+      "groups": {}
+    },
+    "competitor_history": {
+      "rows": 1916,
+      "byStore": {
+        "2号店": {
+          "rows": 1916,
+          "min": "2026-07-27T02:32:36Z",
+          "max": "2026-10-01T20:00:09Z",
+          "days": [
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01",
+            "2026-08-02",
+            "2026-08-03",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-06",
+            "2026-08-07",
+            "2026-08-08",
+            "2026-08-09",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-14",
+            "2026-08-15",
+            "2026-08-16",
+            "2026-08-17",
+            "2026-08-18",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-22",
+            "2026-08-23",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-28",
+            "2026-08-29",
+            "2026-08-30",
+            "2026-08-31",
+            "2026-09-01",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-04",
+            "2026-09-05",
+            "2026-09-06",
+            "2026-09-07",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-12",
+            "2026-09-13",
+            "2026-09-14",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-18",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-25",
+            "2026-09-26",
+            "2026-09-27",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-01"
+          ]
+        }
+      },
+      "numeric": {
+        "sold": {
+          "sum": 314240,
+          "zero": 1,
+          "nonzero": 1915,
+          "min": 0,
+          "max": 370
+        },
+        "price": {
+          "sum": 72163.80999999921,
+          "zero": 0,
+          "nonzero": 1916,
+          "min": 23,
+          "max": 129
+        },
+        "ratingCount": {
+          "sum": 743379,
+          "zero": 2,
+          "nonzero": 1914,
+          "min": 0,
+          "max": 1022
+        }
+      },
+      "groups": {}
+    },
+    "freight_settings": {
+      "rows": 2,
+      "byStore": {
+        "1号店": {
+          "rows": 1,
+          "min": "2026-08-17T00:39:50Z",
+          "max": "2026-08-17T00:39:50Z",
+          "days": [
+            "2026-08-17"
+          ]
+        },
+        "2号店": {
+          "rows": 1,
+          "min": "2026-08-17T00:39:50Z",
+          "max": "2026-08-17T00:39:50Z",
+          "days": [
+            "2026-08-17"
+          ]
+        }
+      },
+      "numeric": {
+        "airFee": {
+          "sum": 156.60000000000002,
+          "zero": 0,
+          "nonzero": 2,
+          "min": 68.4,
+          "max": 88.2
+        },
+        "airDays": {
+          "sum": 16,
+          "zero": 0,
+          "nonzero": 2,
+          "min": 8,
+          "max": 8
+        },
+        "shippingFee": {
+          "sum": 2400,
+          "zero": 0,
+          "nonzero": 2,
+          "min": 1200,
+          "max": 1200
+        },
+        "exchangeRate": {
+          "sum": 3.7,
+          "zero": 0,
+          "nonzero": 2,
+          "min": 1.85,
+          "max": 1.85
+        },
+        "shippingDays": {
+          "sum": 80,
+          "zero": 0,
+          "nonzero": 2,
+          "min": 40,
+          "max": 40
+        }
+      },
+      "groups": {}
+    },
+    "sync_runs": {
+      "rows": 1366,
+      "byStore": {
+        "2号店": {
+          "rows": 680,
+          "min": "2026-07-17T17:35:12Z",
+          "max": "2026-10-01T20:41:23Z",
+          "days": [
+            "2026-07-17",
+            "2026-07-18",
+            "2026-07-19",
+            "2026-07-20",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-25",
+            "2026-07-26",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01",
+            "2026-08-02",
+            "2026-08-03",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-06",
+            "2026-08-07",
+            "2026-08-08",
+            "2026-08-09",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-14",
+            "2026-08-15",
+            "2026-08-16",
+            "2026-08-17",
+            "2026-08-18",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-22",
+            "2026-08-23",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-28",
+            "2026-08-29",
+            "2026-08-30",
+            "2026-08-31",
+            "2026-09-01",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-04",
+            "2026-09-05",
+            "2026-09-06",
+            "2026-09-07",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-12",
+            "2026-09-13",
+            "2026-09-14",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-19",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-25",
+            "2026-09-26",
+            "2026-09-27",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-01"
+          ]
+        },
+        "1号店": {
+          "rows": 686,
+          "min": "2026-07-17T17:35:12Z",
+          "max": "2026-10-01T20:41:23Z",
+          "days": [
+            "2026-07-17",
+            "2026-07-18",
+            "2026-07-19",
+            "2026-07-20",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-25",
+            "2026-07-26",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01",
+            "2026-08-02",
+            "2026-08-03",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-06",
+            "2026-08-07",
+            "2026-08-08",
+            "2026-08-09",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-14",
+            "2026-08-15",
+            "2026-08-16",
+            "2026-08-17",
+            "2026-08-18",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-22",
+            "2026-08-23",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-28",
+            "2026-08-29",
+            "2026-08-30",
+            "2026-08-31",
+            "2026-09-01",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-04",
+            "2026-09-05",
+            "2026-09-06",
+            "2026-09-07",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-12",
+            "2026-09-13",
+            "2026-09-14",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-19",
+            "2026-09-20",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-25",
+            "2026-09-26",
+            "2026-09-27",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-01"
+          ]
+        }
+      },
+      "numeric": {
+        "sourceRows": {
+          "sum": 103545,
+          "zero": 1164,
+          "nonzero": 202,
+          "min": 0,
+          "max": 1966
+        },
+        "storedRows": {
+          "sum": 98546,
+          "zero": 1170,
+          "nonzero": 196,
+          "min": 0,
+          "max": 1966
+        },
+        "pendingRows": {
+          "sum": 342,
+          "zero": 1361,
+          "nonzero": 5,
+          "min": 0,
+          "max": 244
+        }
+      },
+      "groups": {
+        "status": {
+          "succeeded": {
+            "rows": 996
+          },
+          "failed": {
+            "rows": 337
+          },
+          "skipped": {
+            "rows": 33
+          }
+        },
+        "task": {
+          "NoonReconciliation": {
+            "rows": 82
+          },
+          "SyncTransactionFees": {
+            "rows": 216
+          },
+          "AdAutoSyncJob": {
+            "rows": 374
+          },
+          "MorningSyncAndPlan": {
+            "rows": 534
+          },
+          "SyncPromoJob": {
+            "rows": 160
+          }
+        },
+        "step": {
+          "core_access": {
+            "rows": 12
+          },
+          "ads_access": {
+            "rows": 10
+          },
+          "promo_access": {
+            "rows": 10
+          },
+          "finance_access": {
+            "rows": 10
+          },
+          "skus": {
+            "rows": 183
+          },
+          "orders": {
+            "rows": 183
+          },
+          "deals": {
+            "rows": 183
+          },
+          "procurement_plans": {
+            "rows": 5
+          },
+          "promo": {
+            "rows": 164
+          },
+          "transactions": {
+            "rows": 114
+          },
+          "statements": {
+            "rows": 114
+          },
+          "ads": {
+            "rows": 156
+          },
+          "ad_queries": {
+            "rows": 156
+          },
+          "ads_blacklist": {
+            "rows": 66
+          }
+        }
+      }
+    },
+    "search_windows_113": {
+      "rows": 1091551,
+      "byStore": {
+        "1号店": {
+          "rows": 1091551,
+          "min": "2026-06-10T00:00:00Z",
+          "max": "2026-09-16T00:00:00Z",
+          "days": [
+            "2026-06-10",
+            "2026-06-17",
+            "2026-06-18",
+            "2026-08-22",
+            "2026-08-23",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-28",
+            "2026-08-30",
+            "2026-09-01",
+            "2026-09-16"
+          ]
+        }
+      },
+      "numeric": {
+        "atc": {
+          "sum": 13949,
+          "zero": 1082543,
+          "nonzero": 9008,
+          "min": 0,
+          "max": 39
+        },
+        "bid": {
+          "sum": 337251.77000072104,
+          "zero": 0,
+          "nonzero": 1091551,
+          "min": 0.25,
+          "max": 0.37
+        },
+        "views": {
+          "sum": 3565999,
+          "zero": 1269,
+          "nonzero": 1090282,
+          "min": 0,
+          "max": 18015
+        },
+        "clicks": {
+          "sum": 86448,
+          "zero": 1042413,
+          "nonzero": 49138,
+          "min": 0,
+          "max": 219
+        },
+        "orders": {
+          "sum": 2760,
+          "zero": 1089424,
+          "nonzero": 2127,
+          "min": 0,
+          "max": 15
+        },
+        "spends": {
+          "sum": 25827.090000000702,
+          "zero": 1042413,
+          "nonzero": 49138,
+          "min": 0,
+          "max": 61.44
+        },
+        "revenue": {
+          "sum": 127423.06000000123,
+          "zero": 1089424,
+          "nonzero": 2127,
+          "min": 0,
+          "max": 438.6
+        },
+        "effectiveBid": {
+          "sum": 337251.77000072104,
+          "zero": 0,
+          "nonzero": 1091551,
+          "min": 0.25,
+          "max": 0.37
+        }
+      },
+      "groups": {},
+      "periods": {
+        "2026-09-16～2026-09-19": {
+          "rows": 14390,
+          "campaigns": 81,
+          "spends": 218.91000000000048,
+          "revenue": 465.2,
+          "orders": 12,
+          "translated": 14256
+        },
+        "2026-08-22～2026-09-22": {
+          "rows": 97634,
+          "campaigns": 82,
+          "spends": 2184.9399999999287,
+          "revenue": 12002.650000000003,
+          "orders": 259,
+          "translated": 97454
+        },
+        "2026-08-23～2026-09-23": {
+          "rows": 96120,
+          "campaigns": 82,
+          "spends": 2128.4799999999236,
+          "revenue": 11786.260000000002,
+          "orders": 255,
+          "translated": 95941
+        },
+        "2026-08-24～2026-09-24": {
+          "rows": 96397,
+          "campaigns": 82,
+          "spends": 2095.1299999999187,
+          "revenue": 11317.050000000001,
+          "orders": 245,
+          "translated": 96211
+        },
+        "2026-08-25～2026-09-25": {
+          "rows": 97764,
+          "campaigns": 82,
+          "spends": 2110.5499999999183,
+          "revenue": 10951.999999999998,
+          "orders": 238,
+          "translated": 97573
+        },
+        "2026-08-26～2026-09-26": {
+          "rows": 95639,
+          "campaigns": 82,
+          "spends": 2052.7799999999133,
+          "revenue": 10422.749999999998,
+          "orders": 226,
+          "translated": 95446
+        },
+        "2026-08-27～2026-09-27": {
+          "rows": 95523,
+          "campaigns": 82,
+          "spends": 2042.979999999915,
+          "revenue": 10222.690000000002,
+          "orders": 220,
+          "translated": 95327
+        },
+        "2026-08-28～2026-09-28": {
+          "rows": 96702,
+          "campaigns": 82,
+          "spends": 2034.659999999914,
+          "revenue": 10174.920000000002,
+          "orders": 219,
+          "translated": 96503
+        },
+        "2026-08-30～2026-09-30": {
+          "rows": 95362,
+          "campaigns": 82,
+          "spends": 1975.399999999918,
+          "revenue": 9728.650000000005,
+          "orders": 211,
+          "translated": 95044
+        },
+        "2026-09-01～2026-10-01": {
+          "rows": 95181,
+          "campaigns": 82,
+          "spends": 1944.459999999917,
+          "revenue": 9628.890000000005,
+          "orders": 209,
+          "translated": 92936
+        },
+        "2026-06-18～2026-07-18": {
+          "rows": 72530,
+          "campaigns": 43,
+          "spends": 2412.49999999994,
+          "revenue": 10187.02000000001,
+          "orders": 221,
+          "translated": 22655
+        },
+        "2026-06-10～2026-07-10": {
+          "rows": 67186,
+          "campaigns": 41,
+          "spends": 2235.1699999999237,
+          "revenue": 10446.900000000012,
+          "orders": 227,
+          "translated": 21166
+        },
+        "2026-06-17～2026-07-17": {
+          "rows": 71123,
+          "campaigns": 43,
+          "spends": 2391.1299999999414,
+          "revenue": 10088.080000000009,
+          "orders": 218,
+          "translated": 22191
+        }
+      }
+    },
+    "search_windows_112": {
+      "rows": 819576,
+      "byStore": {
+        "2号店": {
+          "rows": 819576,
+          "min": "2026-06-10T00:00:00Z",
+          "max": "2026-09-16T00:00:00Z",
+          "days": [
+            "2026-06-10",
+            "2026-06-17",
+            "2026-06-18",
+            "2026-08-22",
+            "2026-08-23",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-28",
+            "2026-08-30",
+            "2026-09-01",
+            "2026-09-16"
+          ]
+        }
+      },
+      "numeric": {
+        "atc": {
+          "sum": 7621,
+          "zero": 814275,
+          "nonzero": 5301,
+          "min": 0,
+          "max": 35
+        },
+        "bid": {
+          "sum": 260865.60000161352,
+          "zero": 0,
+          "nonzero": 819576,
+          "min": 0.26,
+          "max": 0.68
+        },
+        "views": {
+          "sum": 3449367,
+          "zero": 1802,
+          "nonzero": 817774,
+          "min": 0,
+          "max": 25043
+        },
+        "clicks": {
+          "sum": 68741,
+          "zero": 782041,
+          "nonzero": 37535,
+          "min": 0,
+          "max": 387
+        },
+        "orders": {
+          "sum": 1585,
+          "zero": 818280,
+          "nonzero": 1296,
+          "min": 0,
+          "max": 8
+        },
+        "spends": {
+          "sum": 22595.50000000214,
+          "zero": 782041,
+          "nonzero": 37535,
+          "min": 0,
+          "max": 173.63
+        },
+        "revenue": {
+          "sum": 81534.14000000025,
+          "zero": 818280,
+          "nonzero": 1296,
+          "min": 0,
+          "max": 476.01
+        },
+        "effectiveBid": {
+          "sum": 260865.60000161352,
+          "zero": 0,
+          "nonzero": 819576,
+          "min": 0.26,
+          "max": 0.68
+        }
+      },
+      "groups": {},
+      "periods": {
+        "2026-06-10～2026-07-10": {
+          "rows": 116288,
+          "campaigns": 75,
+          "spends": 4060.770000000076,
+          "revenue": 14754.919999999966,
+          "orders": 283,
+          "translated": 29173
+        },
+        "2026-06-17～2026-07-17": {
+          "rows": 128069,
+          "campaigns": 75,
+          "spends": 4476.800000000099,
+          "revenue": 15174.479999999965,
+          "orders": 291,
+          "translated": 31437
+        },
+        "2026-06-18～2026-07-18": {
+          "rows": 129112,
+          "campaigns": 75,
+          "spends": 4527.580000000094,
+          "revenue": 15114.019999999968,
+          "orders": 292,
+          "translated": 31597
+        },
+        "2026-09-16～2026-09-19": {
+          "rows": 8238,
+          "campaigns": 94,
+          "spends": 129.36000000000053,
+          "revenue": 398.79999999999995,
+          "orders": 9,
+          "translated": 8042
+        },
+        "2026-08-22～2026-09-22": {
+          "rows": 55413,
+          "campaigns": 94,
+          "spends": 1193.6499999999749,
+          "revenue": 4445.780000000002,
+          "orders": 82,
+          "translated": 55115
+        },
+        "2026-08-23～2026-09-23": {
+          "rows": 53550,
+          "campaigns": 94,
+          "spends": 1163.029999999976,
+          "revenue": 4633.480000000002,
+          "orders": 86,
+          "translated": 53253
+        },
+        "2026-08-24～2026-09-24": {
+          "rows": 52971,
+          "campaigns": 94,
+          "spends": 1154.5799999999758,
+          "revenue": 4671.3600000000015,
+          "orders": 87,
+          "translated": 52635
+        },
+        "2026-08-25～2026-09-25": {
+          "rows": 52936,
+          "campaigns": 94,
+          "spends": 1155.079999999976,
+          "revenue": 4467.220000000002,
+          "orders": 86,
+          "translated": 52634
+        },
+        "2026-08-26～2026-09-26": {
+          "rows": 51876,
+          "campaigns": 94,
+          "spends": 1122.0999999999772,
+          "revenue": 4078.0600000000027,
+          "orders": 80,
+          "translated": 51581
+        },
+        "2026-08-27～2026-09-27": {
+          "rows": 51048,
+          "campaigns": 94,
+          "spends": 1098.3499999999788,
+          "revenue": 3815.360000000002,
+          "orders": 78,
+          "translated": 50752
+        },
+        "2026-08-28～2026-09-28": {
+          "rows": 50851,
+          "campaigns": 94,
+          "spends": 1104.879999999978,
+          "revenue": 4100.4500000000035,
+          "orders": 85,
+          "translated": 50556
+        },
+        "2026-08-30～2026-09-30": {
+          "rows": 48704,
+          "campaigns": 94,
+          "spends": 1061.1099999999806,
+          "revenue": 3726.1300000000033,
+          "orders": 80,
+          "translated": 48016
+        },
+        "2026-09-01～2026-10-01": {
+          "rows": 20520,
+          "campaigns": 89,
+          "spends": 348.2099999999991,
+          "revenue": 2154.0800000000004,
+          "orders": 46,
+          "translated": 0
+        }
+      }
+    }
+  },
+  "purchaseConsistency": {
+    "parentRows": 100,
+    "childRows": 532,
+    "mismatchBatches": []
+  },
+  "freightRows": [
+    {
+      "time": "2026-08-17T00:39:50Z",
+      "store": "1号店",
+      "airFee": 88.2,
+      "airDays": 8,
+      "storeId": "113",
+      "shippingFee": 1200,
+      "exchangeRate": 1.85,
+      "shippingDays": 40
+    },
+    {
+      "time": "2026-08-17T00:39:50Z",
+      "store": "2号店",
+      "airFee": 68.4,
+      "airDays": 8,
+      "storeId": "112",
+      "shippingFee": 1200,
+      "exchangeRate": 1.85,
+      "shippingDays": 40
+    }
+  ],
+  "catalogDateCoverage": {
+    "1号店": {
+      "rows": 2235,
+      "days": 12,
+      "first": "2026-06-28",
+      "last": "2026-10-01",
+      "spanDays": 96
+    },
+    "2号店": {
+      "rows": 5311,
+      "days": 40,
+      "first": "2026-06-28",
+      "last": "2026-10-01",
+      "spanDays": 96
+    }
+  }
+}
