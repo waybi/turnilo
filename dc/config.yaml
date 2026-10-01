@@ -1,5 +1,5 @@
 # Turnilo 配置：大兵一号店(113) / 大兵2号店(112) 数据分析
-# 数据由 dc/export.mjs 从 data-center MySQL 导出；启动：node bin/turnilo --config dc/config.yaml --port 9092
+# 核心视图模板；node dc/sync-all.mjs 生成包含全部业务集的版本配置，node dc/start.mjs 启动最新版本
 
 customization:
   title: 大兵店铺数据分析
@@ -13,8 +13,8 @@ dataCubes:
 
       **三组指标，各看各的层，不会重复计算：**
       - 「日报 · 」开头：按天的活动数据，**看趋势用这组**（时间轴是真实日期）。
-      - 「搜索词 · 」开头：买家搜索词（含没点击的），只有两期报表 **06-18~07-18**、**08-23~09-23**，07-19~08-22 暂无。
-      - 「商品 · 」开头：每个商品最近 1 个月的汇总快照（08-24~09-24），只有同步那天一个时间点。
+      - 「搜索词 · 」开头：买家搜索词（含没点击的），每店挑最新且互不重叠的完整区间；实际窗口写在生成配置与导出元数据中，不按月摊分。
+      - 「商品 · 」开头：每个商品最近 1 个月的汇总快照，时间挂在统计区间开始日上（和搜索词一样）。
 
       用法：拖「搜索词」维度时配「搜索词 · 」指标，拖「商品名称」时配「商品 · 」指标；「日报」没有搜索词和商品维度，这两个维度下日报指标会落到「空值」行。
 
@@ -29,7 +29,7 @@ dataCubes:
     introspection: no-autofill
     maxSplits: 4
     dimensions:
-      - { name: time, title: 日期, description: "日报=当天；搜索词=报表期开始日；商品=同步日", kind: time, formula: $time }
+      - { name: time, title: 日期, description: "日报=当天；搜索词=报表期开始日；商品=统计区间开始日", kind: time, formula: $time }
       - { name: store, title: 店铺, formula: $store }
       - { name: level, title: 数据层级, description: "daily=日报，query=搜索词，sku=商品", formula: $level }
       - { name: reportWindow, title: 报表期, description: "日报=每日；搜索词/商品=该份报表覆盖的日期段", formula: $reportWindow }

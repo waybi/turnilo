@@ -10,3 +10,5 @@ config.yaml
 /dc/data/
 /dc/config.before-merge.yaml
 !/dc/config.yaml
+# Versioned private two-store snapshot configuration
+/dc/config.20*.yaml

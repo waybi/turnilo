@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // 把 data-center MySQL 里「大兵一号店(113) / 大兵2号店(112)」的数据导出成 Turnilo 可读的 JSON-lines 文件。
-// 用法：node dc/export.mjs        （在 turnilo 目录下执行；导出后重启 Turnilo 生效）
+// 内部核心导出，由 node dc/sync-all.mjs 创建版本目录后调用；完成后 node dc/start.mjs 加载。
 //
 // 规则：
 // - 只导出 uid/cid in (112,113)，其他账号一律不导。
@@ -8,39 +8,46 @@
 //   每家店按 end_date 从新到旧挑选，和已选报表期有重叠的就跳过 → 得到互不重叠的最新报表期，花费可直接加总。
 //   所有搜索词都保留（包括没点击的），不做删减。
 import { execFileSync } from "node:child_process";
-import { readFileSync, writeFileSync, mkdirSync, renameSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
+import yaml from "js-yaml";
+import { pickWindows } from "./sync-helpers.mjs";
 import { fileURLToPath } from "node:url";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const OUT = join(HERE, "data");
+const OUT = resolve(process.env.DC_EXPORT_OUT || join(HERE, "data"));
+if (!OUT.startsWith(join(HERE, "data") + "/")) throw new Error("Use sync-all.mjs: export destination must be a new version under dc/data/");
+mkdirSync(OUT, { recursive: true, mode: 0o700 });
+const exportsMeta = [];
 const SVC_BASE = "/Users/waybi/Desktop/my/copy/data-center/data-center/svc_base";
 const STORES = "112,113";
 const STORE_NAME = `CASE %s WHEN 113 THEN '1号店' WHEN 112 THEN '2号店' END`;
 
 function readDbConfig() {
-  const text = readFileSync(join(SVC_BASE, "etc/dev.yaml"), "utf8");
-  const block = text.split(/\n(?=\S)/).find(b => b.startsWith("mysql:"));
-  const get = k => (block.match(new RegExp(`\\n\\s+${k}:\\s*"?([^"\\n#]*)"?`)) || [])[1]?.trim();
-  return { host: get("host"), port: get("port"), user: get("username"), password: get("password"), db: get("name") };
+  const c = yaml.safeLoad(readFileSync(join(SVC_BASE, "etc/dev.yaml"), "utf8")).mysql;
+  if (!["127.0.0.1", "localhost", "::1"].includes(c.host)) throw new Error("Only local MySQL permitted");
+  return { host: c.host, port: String(c.port), user: c.username, password: c.password, db: c.name };
 }
 const DB = readDbConfig();
 
 function query(sql) {
-  const out = execFileSync("mysql", ["-h", DB.host, "-P", DB.port, "-u", DB.user, DB.db, "-N", "-B", "--raw", "-e", sql], {
+  const out = execFileSync("/usr/local/mysql/bin/mysql", ["--protocol=TCP", "-h", DB.host, "-P", DB.port, "-u", DB.user, DB.db, "-N", "-B", "--raw", "-e", `SET SESSION MAX_EXECUTION_TIME=180000; SET TRANSACTION ISOLATION LEVEL REPEATABLE READ; START TRANSACTION READ ONLY; ${sql}; ROLLBACK;`], {
     env: { ...process.env, MYSQL_PWD: DB.password },
-    maxBuffer: 1024 * 1024 * 1024
+    maxBuffer: 1024 * 1024 * 1024,
+    timeout: 200000
   });
   return out.toString("utf8").split("\n").filter(Boolean);
 }
 
 // 每行 SELECT JSON_OBJECT(...)，MySQL 自己负责转义，输出就是 JSON-lines
 function exportCube(name, sql) {
-  const lines = query(sql);
+  const [expectedRaw, ...lines] = query(`SELECT COUNT(*) FROM (${sql}) counted; ${sql}`);
+  const expectedRows = Number(expectedRaw);
+  if (lines.length !== expectedRows) throw new Error(`source/export mismatch: ${name}`);
   mkdirSync(OUT, { recursive: true });
-  const tmp = join(OUT, `${name}.json.tmp`);
-  writeFileSync(tmp, lines.join("\n") + "\n");
-  renameSync(tmp, join(OUT, `${name}.json`));
+  const target = join(OUT, `${name}.json`);
+  writeFileSync(target, lines.length ? lines.join("\n") + "\n" : "", { mode: 0o600, flag: "wx" });
+  exportsMeta.push({ name, rows: lines.length, expectedRows, sql });
   console.log(`${name}: ${lines.length} 行`);
   return lines.length;
 }
@@ -49,14 +56,10 @@ function exportCube(name, sql) {
 const windows = query(`SELECT uid, start_date, end_date FROM ad_search_queries
   WHERE uid IN (${STORES}) GROUP BY uid, start_date, end_date ORDER BY uid, end_date DESC, start_date DESC`)
   .map(l => { const [uid, s, e] = l.split("\t"); return { uid, s, e }; });
-const picked = [];
-for (const w of windows) {
-  const overlap = picked.some(p => p.uid === w.uid && !(w.e < p.s || w.s > p.e));
-  if (!overlap) picked.push(w);
-}
+const picked = pickWindows(windows);
 console.log("搜索词选用报表期：");
 for (const p of picked) console.log(`  ${p.uid === "113" ? "1号店" : "2号店"}  ${p.s} ~ ${p.e}`);
-const windowCond = picked.map(p => `(q.uid=${p.uid} AND q.start_date='${p.s}' AND q.end_date='${p.e}')`).join(" OR ");
+const windowCond = picked.map(p => `(q.uid=${p.uid} AND q.start_date='${p.s}' AND q.end_date='${p.e}')`).join(" OR ") || "FALSE";
 
 exportCube("search_queries", `SELECT JSON_OBJECT(
   'time', DATE_FORMAT(q.start_date, '%Y-%m-%dT00:00:00Z'),
@@ -76,7 +79,7 @@ exportCube("search_queries", `SELECT JSON_OBJECT(
   'views', q.views, 'clicks', q.clicks, 'orders', q.orders, 'atc', q.atc,
   'spends', q.spends, 'revenue', q.revenue, 'bid', q.bid, 'effectiveBid', q.effective_bid)
 FROM ad_search_queries q
-LEFT JOIN ads a ON a.uid = q.uid AND a.campaign_code = q.campaign_code
+LEFT JOIN ads a ON a.uid = q.uid AND a.country = q.country AND a.campaign_code = q.campaign_code
 WHERE q.uid IN (${STORES}) AND (${windowCond})`);
 
 // ---------- 2. 广告日报 ----------
@@ -91,14 +94,14 @@ exportCube("ad_daily", `SELECT JSON_OBJECT(
   'views', m.views, 'clicks', m.clicks, 'orders', m.orders, 'atc', m.atc,
   'spends', m.spends, 'revenue', m.revenue)
 FROM ad_daily_metrics m
-LEFT JOIN ads a ON a.uid = m.uid AND a.campaign_code = m.campaign_code
+LEFT JOIN ads a ON a.uid = m.uid AND a.country = m.country AND a.campaign_code = m.campaign_code
 WHERE m.uid IN (${STORES})`);
 
 // ---------- 2b. 广告商品 ad_skus ----------
 // 该表没有日期：svc_base SyncAdList 每次拉「最近 1 个月」(util.BeforeMonth(1)~今天) 的 SKU 汇总后覆盖写入
 // (usercase_ad.go:205,258-307)。所以用 updated_at 往前推 1 个月作为统计区间。店铺经 ads.adgroup_code 关联。
 exportCube("ad_skus", `SELECT JSON_OBJECT(
-  'time', DATE_FORMAT(s.updated_at, '%Y-%m-%dT00:00:00Z'),
+  'time', DATE_FORMAT(DATE_SUB(DATE(s.updated_at), INTERVAL 1 MONTH), '%Y-%m-%dT00:00:00Z'),
   'store', ${STORE_NAME.replace("%s", "a.uid")},
   'window', CONCAT(DATE_FORMAT(DATE_SUB(DATE(s.updated_at), INTERVAL 1 MONTH), '%m-%d'), '~', DATE_FORMAT(s.updated_at, '%m-%d')),
   'campaign', a.campaign_code,
@@ -146,7 +149,8 @@ FROM sku_catalog_metrics c WHERE c.cid IN (${STORES})`);
 // 每行加 level 字段标明来自哪一层；配置里每个指标只对自己那一层求和，避免三层互相重复计算。
 {
   const parts = [["daily", "ad_daily"], ["query", "search_queries"], ["sku", "ad_skus"]];
-  const out = [];
+  const rows = [];
+  const allKeys = new Set();
   for (const [level, file] of parts) {
     for (const line of readFileSync(join(OUT, `${file}.json`), "utf8").split("\n")) {
       if (!line) continue;
@@ -155,14 +159,22 @@ FROM sku_catalog_metrics c WHERE c.cid IN (${STORES})`);
       if (level === "daily") row.reportWindow = "每日";
       if (level === "query") row.reportWindow = row.period;
       if (level === "sku") row.reportWindow = row.window;
-      out.push(JSON.stringify(row));
+      Object.keys(row).forEach(k => allKeys.add(k));
+      rows.push(row);
     }
   }
-  const tmp = join(OUT, "ads_all.json.tmp");
-  writeFileSync(tmp, out.join("\n") + "\n");
-  renameSync(tmp, join(OUT, "ads_all.json"));
+  // Turnilo 只按文件开头的行推断有哪些列。日报排在最前、没有 skuName/query 等字段，
+  // 会导致查询报 "could not resolve $skuName"（HTTP 500）。所以每行补齐全部字段：数值填 0，文本填 null。
+  const NUMERIC = new Set(["views", "clicks", "orders", "atc", "spends", "revenue"]);
+  const out = rows.map(r => {
+    const full = {};
+    for (const k of allKeys) full[k] = k in r ? r[k] : (NUMERIC.has(k) ? 0 : null);
+    return JSON.stringify(full);
+  });
+  writeFileSync(join(OUT, "ads_all.json"), out.join("\n") + "\n", { mode: 0o600, flag: "wx" });
+  exportsMeta.push({ name: "ads_all", rows: out.length, derivedFrom: parts.map(p => p[1]) });
   console.log(`ads_all（合并）: ${out.length} 行`);
 }
 
-writeFileSync(join(OUT, "_export_meta.json"), JSON.stringify({ exportedAt: new Date().toISOString(), searchQueryWindows: picked }, null, 2));
+writeFileSync(join(OUT, "_export_meta.json"), JSON.stringify({ exportedAt: new Date().toISOString(), stores: [112,113], searchQueryWindows: picked, datasets: exportsMeta }, null, 2), { mode: 0o600, flag: "wx" });
 console.log("导出完成 →", OUT);
