@@ -12,3 +12,6 @@ config.yaml
 !/dc/config.yaml
 # Versioned private two-store snapshot configuration
 /dc/config.20*.yaml
+# Generated at startup by dc/start.mjs (live config with measure descriptions) and the retired evidence cube
+/dc/config.live.yaml
+/dc/config.growth-evidence.yaml

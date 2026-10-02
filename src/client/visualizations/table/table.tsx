@@ -26,6 +26,7 @@ import { ImmutableRecord } from "../../../common/utils/immutable-utils/immutable
 import { TableSettings } from "../../../common/visualization-manifests/table/settings";
 import { TABLE_MANIFEST } from "../../../common/visualization-manifests/table/table";
 import { HighlightModal } from "../../components/highlight-modal/highlight-modal";
+import { AnchorRect, DescriptionBubble } from "../../components/hover-description/hover-description";
 import { Direction, ResizeHandle } from "../../components/resize-handle/resize-handle";
 import { Scroller, ScrollerLayout, ScrollerPart } from "../../components/scroller/scroller";
 import { BaseVisualization, BaseVisualizationState } from "../base-visualization/base-visualization";
@@ -51,21 +52,33 @@ const SEGMENT_WIDTH = 300;
 const MEASURE_WIDTH = 130;
 const SPACE_RIGHT = 10;
 const MIN_DIMENSION_WIDTH = 100;
+const HEADER_HOVER_DELAY = 250;
+
+interface HeaderHover {
+  column: number;
+  title: string;
+  description: string;
+  anchor: AnchorRect;
+}
 
 export interface TableState extends BaseVisualizationState {
   flatData?: PseudoDatum[];
   hoverRow?: Datum;
   segmentWidth: number;
+  headerHover?: HeaderHover;
 }
 
 export class Table extends BaseVisualization<TableState> {
   protected className = TABLE_MANIFEST.name;
   protected innerTableRef = React.createRef<HTMLDivElement>();
+  private headerHoverTimer: number = null;
+  private pendingHeaderColumn: number = null;
 
   getDefaultState(): TableState {
     return {
       flatData: null,
       hoverRow: null,
+      headerHover: null,
       segmentWidth: SEGMENT_WIDTH,
       ...super.getDefaultState()
     };
@@ -136,6 +149,7 @@ export class Table extends BaseVisualization<TableState> {
   }
 
   onClick = (x: number, y: number, part: ScrollerPart) => {
+    this.clearHeaderHover();
     const position = this.calculateMousePosition(x, y, part);
 
     switch (position.element) {
@@ -157,16 +171,69 @@ export class Table extends BaseVisualization<TableState> {
     if (position.element === HoverElement.ROW && position.datum !== hoverRow) {
       this.setState({ hoverRow: position.datum });
     }
+    if (position.element === HoverElement.HEADER) {
+      this.scheduleHeaderHover(x);
+    } else {
+      this.clearHeaderHover();
+    }
   };
 
   resetHover = () => {
     const { hoverRow } = this.state;
+    this.clearHeaderHover();
     if (hoverRow) {
       this.setState({ hoverRow: null });
     }
   };
 
-  setScroll = (scrollTop: number, scrollLeft: number) => this.setState({ scrollLeft, scrollTop });
+  setScroll = (scrollTop: number, scrollLeft: number) => {
+    this.clearHeaderHover();
+    this.setState({ scrollLeft, scrollTop });
+  };
+
+  componentWillUnmount() {
+    super.componentWillUnmount();
+    window.clearTimeout(this.headerHoverTimer);
+  }
+
+  // Measure column headers: show the measure's description card under the hovered header cell.
+  private scheduleHeaderHover(x: number) {
+    const column = Math.floor((x - this.getSegmentWidth()) / this.getIdealColumnWidth());
+    const { headerHover } = this.state;
+    if (headerHover && headerHover.column === column) return;
+    if (headerHover) this.setState({ headerHover: null });
+    if (this.pendingHeaderColumn === column) return;
+    window.clearTimeout(this.headerHoverTimer);
+    this.pendingHeaderColumn = column;
+    this.headerHoverTimer = window.setTimeout(() => {
+      this.pendingHeaderColumn = null;
+      this.setState({ headerHover: this.headerHoverFor(column) });
+    }, HEADER_HOVER_DELAY);
+  }
+
+  private headerHoverFor(column: number): HeaderHover | null {
+    const { essence } = this.props;
+    const inner = this.innerTableRef.current;
+    if (!inner || column < 0) return null;
+    const perSeries = essence.hasComparison() ? 3 : 1;
+    const series = essence.getConcreteSeries().get(Math.floor(column / perSeries));
+    if (!series || !series.measure.description) return null;
+    const rect = inner.getBoundingClientRect();
+    const columnWidth = this.getIdealColumnWidth();
+    const left = rect.left + this.getSegmentWidth() + column * columnWidth - (this.state.scrollLeft || 0);
+    return {
+      column,
+      title: series.title(),
+      description: series.measure.description,
+      anchor: { left, top: rect.top, bottom: rect.top + HEADER_HEIGHT }
+    };
+  }
+
+  private clearHeaderHover() {
+    window.clearTimeout(this.headerHoverTimer);
+    this.pendingHeaderColumn = null;
+    if (this.state.headerHover) this.setState({ headerHover: null });
+  }
 
   setSegmentWidth = (segmentWidth: number) => this.setState({ segmentWidth });
 
@@ -218,7 +285,7 @@ export class Table extends BaseVisualization<TableState> {
 
   protected renderInternals() {
     const { essence, stage } = this.props;
-    const { flatData, scrollTop, hoverRow, segmentWidth } = this.state;
+    const { flatData, scrollTop, hoverRow, segmentWidth, headerHover } = this.state;
     const collapseRows = this.shouldCollapseRows();
 
     const highlightedRowIndex = this.highlightedRowIndex(flatData);
@@ -297,6 +364,11 @@ export class Table extends BaseVisualization<TableState> {
         onScroll={this.setScroll}
 
       />
+
+      {headerHover && <DescriptionBubble
+        anchor={headerHover.anchor}
+        title={headerHover.title}
+        description={headerHover.description} />}
 
       {highlightedRowIndex !== null &&
       <HighlightModal
