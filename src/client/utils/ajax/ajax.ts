@@ -34,7 +34,8 @@ function getSplitsDescription(ex: Expression): string {
   return splits.join(";");
 }
 
-const CLIENT_TIMEOUT_DELTA = 5000;
+// 本地 native 数据集没有 cluster 对象，前端超时 = 0 + 这个常量；ads_all.json 36.9 万行做多级拆分可能超过 5 秒，故放宽到 60 秒
+const CLIENT_TIMEOUT_DELTA = 60000;
 
 function clientTimeout(cluster: Cluster): number {
   const clusterTimeout = cluster ? cluster.getTimeout() : 0;
